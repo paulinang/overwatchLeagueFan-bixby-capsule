@@ -4,7 +4,6 @@ let config = require('config')
 let secret = require ('secret')
 
 const BASEURL = config.get('pandaScore.baseUrl')
-const LEAGUEID = config.get('pandaScore.league.id')
 
 const getTournamentAPIData = (time, status, count, series) => {
   console.log('Getting series API data')
@@ -12,8 +11,7 @@ const getTournamentAPIData = (time, status, count, series) => {
   const TOURNAMENTURL = BASEURL + '/' +  ENDPOINT
   
   let queryArgs = {
-    token: secret.get('pandaScore.accessToken'),
-    // 'filter[league_id]': LEAGUEID
+    token: secret.get('pandaScore.accessToken')
   }
   
   if (time) {
