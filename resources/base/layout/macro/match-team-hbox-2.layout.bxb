@@ -1,0 +1,40 @@
+layout-macro-def (match-team-hbox-2) {
+  params {
+    param (team) { type (Team) min (Required) max (Many) }
+  }
+  content {
+    if (size(team) == 2) {
+      hbox {
+        content {
+          vbox {
+            grow (5)
+            halign (Center)
+            content {
+              text {
+                value ("[#{value(team[0].name)}]")
+                style (Detail_L)
+              }
+            }
+          }
+          vbox {
+            grow (1)
+            halign (Center)
+            content {
+              single-line { spacer }
+            }
+          }
+          vbox {
+            grow (5)
+            halign (Center)
+            content {
+              text {
+                value ("[#{value(team[1].name)}]")
+                style (Detail_L)
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

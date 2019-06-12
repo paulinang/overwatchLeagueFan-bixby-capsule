@@ -1,0 +1,4 @@
+structure (Tournament) {
+  description (All of the matches of a series under 'stages')
+  extends (Event)
+}

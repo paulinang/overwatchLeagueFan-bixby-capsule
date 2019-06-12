@@ -1,0 +1,26 @@
+layout-macro-def(schedule-result) {
+  params {
+    param (schedule) {
+      type (Schedule)
+      min (Required)
+      max (One)
+    }
+  }
+
+  content {
+    section {
+      content {
+        // layout-macro (schedule-card) {
+        //   param (schedule) { expression (schedule) }
+        // }
+        // TODO: add a card for relevant series/ tournament info
+        
+        if (size(schedule.matches) >= 1) {
+          layout-macro (schedule-match-list) {
+            param (matches) { expression (schedule.matches) }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+endpoints {
+  action-endpoints {
+    action-endpoint (ConstructTimeToFilterBy) {
+      accepted-inputs (duration, date, dateTime, dateInterval, dateTimeInterval)
+      local-endpoint (constructTimeToFilterBy.js)
+    }
+    action-endpoint (GetSchedule) {
+      accepted-inputs ($vivContext, time, status)
+      local-endpoint (getSchedule.js)
+    }
+  }
+}

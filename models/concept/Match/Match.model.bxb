@@ -1,0 +1,38 @@
+structure (Match) {
+  description (One match in Overwatch)
+  extends (Event)
+   
+  property (type) {
+    type (MatchType)
+    min (Required) max (One)
+    visibility (Private)
+  }
+  property (numberOfGames) {
+    type (viv.core.Integer)
+    min (Required) max (One)
+    visibility (Private)
+  }
+  property (opponents) {
+    type (MatchOpponents)
+    min (Required) max (One)
+    visibility (Private)
+  }
+  
+  property (isForfeit) {
+    type (viv.core.Boolean)
+    min (Required) max (One)
+    visibility (Private)
+  }
+  property (isDraw) {
+    type (viv.core.Boolean)
+    min (Required) max (One)
+    visibility (Private)
+  }
+  
+  // disable, data not available in free API :(
+  // property (games) {
+  //   type (MatchGame)
+  //   lazy-source (GetMatchGames)
+  //   min (Optional) max (Many)
+  // }
+}

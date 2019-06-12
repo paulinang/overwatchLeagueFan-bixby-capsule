@@ -1,0 +1,4 @@
+text (PlayerName) {
+  description (Player's in-game name)
+  // TODO: turn this into enum?
+}

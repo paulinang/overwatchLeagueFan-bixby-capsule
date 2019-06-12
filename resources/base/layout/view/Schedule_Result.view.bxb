@@ -1,0 +1,11 @@
+result-view {
+  match: ViewAll {
+    from-property: Schedule (schedule)
+  }
+
+  render {
+    layout-macro (schedule-result) {
+      param (schedule) { expression (schedule) }
+    }
+  }
+}

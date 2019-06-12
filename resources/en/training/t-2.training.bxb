@@ -1,0 +1,5 @@
+train (t-2ru6zftp9kzht89favzonmn7h) {
+  utterance ("[g:Schedule#all] Are there any games (tomorrow)[v:time.DateTimeExpression]?")
+  plan (lcrNCsIwEATgsf49hKAgeM3FJ/CvXrxZvIe4tIGYlGTb6sVnN/UgIuTgwsIM82GKee1K4VrynWRVnUiWDeXSioumbmMMFon9rCq6NoawTIAj8cesEqbQNypcrg2T3z4gEmznbGDfKP7x6//8s6vIYtbqVnAcxF4y9eJwrz2FoJ3FBANkGGKEccz4alnMeH9/fYv7Cw==)
+  last-modified (1560366524758)
+}

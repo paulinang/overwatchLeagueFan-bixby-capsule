@@ -1,0 +1,56 @@
+action (ConstructTimeToFilterBy) {
+  type (Constructor)
+  collect {
+    input-group (when) {
+      requires(OneOf)
+      collect {
+        input (duration) {
+          type (time.DurationPeriod)
+        }
+        input (date) {
+          type (time.Date)
+          default-select { with-rule { select-first } }
+        }
+        input (dateTime) {
+          type (time.DateTime)
+          default-select { with-rule { select-first } }
+        }
+        input (dateInterval) {
+          type (time.DateInterval)
+          default-select { with-rule { select-first } }
+        }
+        input (dateTimeInterval) {
+          type (time.DateTimeInterval)
+          default-select { with-rule { select-first } }
+        }
+        input (dateTimeExpression) {
+          type (time.DateTimeExpression)
+          hidden
+          default-select { with-rule { select-first } }
+        }
+      }
+      validate {
+        // if dateTimeExpression is input, replan to appropriate dateTime object
+        if (exists(dateTimeExpression.date)) {
+          replan {
+            intent { goal: time.Date$expr (dateTimeExpression.date) }
+          }
+        } else-if (exists(dateTimeExpression.dateTime)) {
+          replan {
+            intent { goal: time.DateTime$expr (dateTimeExpression.dateTime) }
+          }
+        } else-if (exists(dateTimeExpression.dateInterval)) {
+          replan {
+            intent { goal: time.DateInterval$expr (dateTimeExpression.dateInterval) }
+          }
+        } else-if (exists(dateTimeExpression.dateTimeInterval)) {
+          replan {
+            intent { goal: time.DateTimeInterval$expr (dateTimeExpression.dateTimeInterval) }
+          }
+        }
+      }
+    }
+  }
+  
+  output (TimeToFilterBy)
+}

@@ -1,0 +1,4 @@
+structure (EventTime) {
+  description (Time of a event)
+  role-of (time.DateTimeInterval)
+}

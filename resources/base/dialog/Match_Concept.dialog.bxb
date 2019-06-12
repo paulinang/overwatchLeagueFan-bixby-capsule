@@ -1,0 +1,7 @@
+dialog (Concept) {
+  match: Match (this)
+  switch (plural(this)) {
+    case (One) { template ("match") }
+    default { template( "matches") }
+  }
+}

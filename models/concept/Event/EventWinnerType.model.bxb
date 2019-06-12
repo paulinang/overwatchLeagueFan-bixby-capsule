@@ -1,0 +1,5 @@
+enum (EventWinnerType) {
+  description (Type of winner)
+  symbol (Player)
+  symbol (Team)
+}

@@ -1,0 +1,18 @@
+structure (OriginalTimeInput) {
+  description (Collects user inputs for time)
+  property (date) {
+    type (time.Date)
+  }
+  property (dateTime) {
+    type (time.DateTime)
+  }
+  property (dateInterval) {
+    type (time.DateInterval)
+  }
+  property (dateTimeInterval) {
+    type (time.DateTimeInterval)
+  }
+  property (duration) {
+    type (time.DurationPeriod)
+  }
+}

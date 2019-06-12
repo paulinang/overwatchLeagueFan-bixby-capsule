@@ -1,0 +1,86 @@
+template-macro-def (date-dialog) {
+  params {
+    param (date) { type (time.Date) min (Required) max (One) }
+  }
+  content {
+    if ("durationInUnit(date, now().date, 'DAYS') == 0") {
+      template ("today")
+    } else-if ("durationInUnit(date, now().date, 'DAYS') == 1") {
+      if (isFuture(date)) {
+        template ("tomorrow")
+      }
+      if (isPast(date)) {
+        template ("yesterday")
+      }
+    }
+    template ("on #{value(date)}")
+  }
+}
+
+template-macro-def (dateTime-dialog) {
+  params {
+    param (dateTime) { type (time.DateTime) min (Required) max (One) }
+  }
+  content {
+    if ("durationInUnit(dateTime.date, now().date, 'DAYS') == 0") {
+      template ("today at #{value(dateTime.time)}")
+    } else-if ("durationInUnit(dateTime.date, now().date, 'DAYS') == 1") {
+      if (isFuture(dateTime)) {
+        template ("tomorrow at #{value(dateTime.time)}")
+      }
+      if (isPast(dateTime)) {
+        template ("yesterday at #{value(dateTime.time)}")
+      }
+    }
+    template ("#{value(dateTime)}")
+  }
+}
+    
+template-macro-def (dateInterval-dialog) {
+  params {
+    param (dateInterval) { type (time.DateInterval) min (Required) max (One) }
+  }
+  content {
+    if (exists(dateInterval.parseTree.explicitOffsetFromNow)) {
+      if (dateInterval.parseTree.relativeNamedDateInterval == 'Week') {
+        template ("#{lower(dateInterval.parseTree.explicitOffsetFromNow)} week")
+      } else-if (exists(dateInterval.parseTree.datePeriod)) {
+        // dateperiod value not working, so join inner properties
+        template ("for the #{lower(dateInterval.parseTree.explicitOffsetFromNow)}[  #{joinAs('value', dateInterval.parseTree.datePeriod.periodYears, dateInterval.parseTree.datePeriod.periodMonths, dateInterval.parseTree.datePeriod.periodWeeks, dateInterval.parseTree.datePeriod.periodDays, dateInterval.parseTree.datePeriod.periodNights)}]")
+      }
+    }
+    
+    if (exists(dateInterval.start) && exists(dateInterval.end)) {
+      if (exists(dateInterval.start.parseTree.explicitOffsetFromNow)) {
+        if (exists(dateInterval.end.parseTree.explicitOffsetFromNow) && dateInterval.start.parseTree.explicitOffsetFromNow != dateInterval.end.parseTree.explicitOffsetFromNow) {
+          // ex. last Thursday to next Friday
+          template ("from #{lower(dateInterval.start.parseTree.explicitOffsetFromNow)} #{dateTime(dateInterval.start, 'EEEE')} to #{lower(dateInterval.end.parseTree.explicitOffsetFromNow)} #{dateTime(dateInterval.end, 'EEEE')}")
+        } 
+        // ex. last Thursday to Friday
+        template ("from #{lower(dateInterval.start.parseTree.explicitOffsetFromNow)} #{dateTime(dateInterval.start, 'EEEE')} to #{dateTime(dateInterval.end, 'EEEE')}")
+      } else-if (exists(dateInterval.end.parseTree.explicitOffsetFromNow)) {
+        template ("from #{dateTime(dateInterval.start, 'EEEE')} to #{lower(dateInterval.end.parseTree.explicitOffsetFromNow)} #{dateTime(dateInterval.end, 'EEEE')}")
+      }
+      
+      if ("durationInUnit(dateInterval.start, now().date, 'YEARS') != 0 && durationInUnit(dateInterval.start, dateInterval.end, 'YEARS') == 0") {
+        template ("from #{dateTime(dateInterval.start, 'MMMM d')} to #{dateTime(dateInterval.end, 'MMMM d YYYY')}")
+      }
+      
+      if ("durationInUnit(dateInterval.end, now().date, 'YEARS') != 0") {
+        template ("from #{dateTime(dateInterval.start, 'MMMM d YYYY')} to #{dateTime(dateInterval.end, 'MMMM d YYYY')}")
+      }
+    
+      template ("from #{dateTime(dateInterval.start, 'EEEE, MMMM d')} to #{dateTime(dateInterval.end, 'EEEE, MMMM d')}")
+    }
+    template ("#{value(dateInterval)}")
+  }
+}
+
+template-macro-def (duration-dialog) {
+  params {
+    param (duration) { type (time.DurationPeriod) min (Required) max (One) }
+  }
+  content {
+    template ("the next #{value(duration)}")
+  }
+}

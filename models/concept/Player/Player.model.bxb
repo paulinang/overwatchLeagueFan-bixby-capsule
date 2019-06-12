@@ -1,0 +1,31 @@
+structure (Player) {
+  description (An eSports player)
+  property (id) {
+    type (PlayerID)
+    min (Required) max (One)
+    visibility (Private)
+  }
+  property (name) {
+    type (PlayerName)
+    min (Required) max (One)
+  }
+  property (imageUrl) {
+    type (viv.core.Text)
+    min (Optional) max (One)
+    visibility (Private)
+  }
+  property (firstName) {
+    type (viv.core.Text)
+    min (Optional) max (One)
+    visibility (Private)
+  }
+  property (lastName) {
+    type (viv.core.Text)
+    min (Optional) max (One)
+    visibility (Private)
+  }
+  property (role) {
+    type (PlayerRole)
+    min (Required) max (One)
+  }
+}

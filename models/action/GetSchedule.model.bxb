@@ -1,0 +1,15 @@
+action (GetSchedule) {
+  description (Get Overwatch league schedule)
+  type (Search)
+  collect {
+    input (time) {
+      type (TimeToFilterBy)
+      min (Optional) max (One)
+    }
+    input (status) {
+      type (EventStatus)
+      min (Optional) max (One)
+    }
+  }
+  output (Schedule)
+}

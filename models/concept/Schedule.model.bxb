@@ -1,0 +1,34 @@
+structure (Schedule) {
+  description (Schedule of OWL matches)
+  property (all) {
+    // train to this in case we want to do property projections later
+    type (ViewAll)
+    min (Required) max (One)
+  }
+  
+  // property (league) {
+  //   type (League)
+  //   min (Required) max (One)
+  // }
+  
+  property (matches) {
+    type (Match)
+    min (Optional) max (Many)
+  }
+  
+  property (series) {
+    type (Series)
+    min (Optional) max (Many)
+  }
+  
+  property (tournaments) {
+    type (Tournament)
+    min (Optional) max (Many)
+  }
+  
+  property (videogameUrl) {
+    type (viv.core.Text)
+    min (Optional) max (One)
+    visibility (Private)
+  }
+}

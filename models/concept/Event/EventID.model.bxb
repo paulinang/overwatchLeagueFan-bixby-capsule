@@ -1,0 +1,3 @@
+integer (EventID) {
+  description (Pandascore API ID for an event)
+}

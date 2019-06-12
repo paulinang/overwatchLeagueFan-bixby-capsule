@@ -1,0 +1,18 @@
+capsule {
+  id (pog.overwatchLeagueFan)
+  version (0.1.0)
+  format (3)
+  targets {
+    target (bixby-mobile-en-US)
+  }
+  runtime-flags {
+    concepts-inherit-super-type-features
+    modern-prompt-rejection
+    support-halt-effect-in-computed-inputs
+  }
+  capsule-imports {
+    import (viv.entity) { as (entity) version (3.18.18) }
+    import (viv.time) { as (time) version-from (entity) }
+    import (viv.image) { as (image) version-from (entity) }
+  }
+}

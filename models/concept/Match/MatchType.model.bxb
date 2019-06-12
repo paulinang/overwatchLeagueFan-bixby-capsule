@@ -1,0 +1,6 @@
+enum (MatchType) {
+  description (Type of match, enum provided by Pandascore)
+  symbol (BestOf)
+  symbol (Custom)
+  symbol (OverwatchBestOf)
+}

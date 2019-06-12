@@ -1,0 +1,7 @@
+enum (EventStatus) {
+  description (Status of whether an event is running)
+  symbol (Canceled)
+  symbol (Running)
+  symbol (Upcoming)
+  symbol (Past)
+}

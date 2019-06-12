@@ -1,0 +1,24 @@
+vocab (EventStatus) {
+  "Canceled" {
+    "canceled"
+  }
+  "Upcoming" {
+    "upcoming"
+    "future"
+    "next"
+    "not started"
+    "haven't started"
+    "about to start"
+  }
+  "Past" {
+    "finished"
+    "completed"
+    "past"
+    "over"
+  }
+   "Running" {
+    "running"
+    "current"
+    "in progress"
+  }
+}

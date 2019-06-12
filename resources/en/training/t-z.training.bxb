@@ -1,0 +1,10 @@
+train (t-zc5k06n7m22guq067xs4dx7kk) {
+  utterance ("[g:Schedule#all] What is the (upcoming)[v:EventStatus:Upcoming] schedule")
+  plan (Y2BhkCvIT9fLL0stKk8sSc7wSU1ML011S8zTC8tMLXfMyWGQxyEfnJyRmlKak8qghEOBe2oJQTWuZal5JcEliSWlxQzMDIwMTECSAUwzAUkQANFAMQA=)
+  last-modified (1560367518014)
+}
+train (t-zgn49f4tv0cc8u101tj4y4kxj) {
+  utterance ("[g:Schedule#all] Show me the schedule for (last week)[v:time.DateTimeExpression]")
+  plan (lcrNCsIwEATgsf49hKAgeM3FJ/CvXrxZvIe4tIGYlGTb6sVnN/UgIuTgwsIM82GKee1K4VrynWRVnUiWDeXSioumbmMMFon9rCq6NoawTIAj8cesEqbQNypcrg2T3z4gEmznbGDfKP7x6//8s6vIYtbqVnAcxF4y9eJwrz2FoJ3FBANkGGKEccz4alnMeH9/fYv7Cw==)
+  last-modified (1560366926267)
+}

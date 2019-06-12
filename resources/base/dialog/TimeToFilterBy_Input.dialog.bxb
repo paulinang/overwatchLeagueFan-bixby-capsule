@@ -1,0 +1,15 @@
+dialog (Input) {
+  match: TimeToFilterBy (this)
+  
+  if (exists(originalInput.date)) {
+    template ("#{macro('date-dialog', originalInput.date)}")
+  } else-if (exists(originalInput.dateTime)) {
+    template ("#{macro('dateTime-dialog', originalInput.dateTime)}")
+  } else-if (exists(originalInput.dateInterval)) {
+    template ("#{macro('dateInterval-dialog', originalInput.dateInterval)}")
+  } else-if (exists(originalInput.dateTimeInterval)) {
+    template ("#{value(originalInput.dateTimeInterval)}")
+  } else-if (exists(originalInput.duration)) {
+    template ("#{macro('duration-dialog', originalInput.duration)}")
+  }
+}

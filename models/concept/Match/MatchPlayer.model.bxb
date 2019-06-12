@@ -1,0 +1,7 @@
+structure (MatchPlayer) {
+  description (Player participating in a match)
+  extends (Player)
+  property (score) {
+    type (viv.core.Integer)
+  }
+}

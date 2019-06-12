@@ -1,0 +1,12 @@
+structure (MatchOpponents) {
+  description (Opponents in a match)
+  property (teams) {
+    type (MatchTeam)
+    min (Optional) max (Many)
+  }
+  
+  property (MatchPlayer) {
+    type (Player)
+    min (Optional) max (Many)
+  }
+}

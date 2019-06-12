@@ -1,0 +1,3 @@
+text (PlayerRole) {
+  description (In-game role)
+}

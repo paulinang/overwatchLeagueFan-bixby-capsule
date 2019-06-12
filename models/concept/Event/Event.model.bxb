@@ -1,0 +1,29 @@
+structure (Event) {
+  description (Basic event concept)
+  property (id) {
+    type (EventID)
+    min (Required) max (One)
+    visibility (Private)
+  }
+  property (name) {
+    type (EventName)
+    min (Required) max (One)
+  }
+  property (time) {
+    type (EventTime)
+    min (Required) max (One)
+    visibility (Private)
+  }
+  property (status) {
+    type (EventStatus)
+    min (Required) max (One)
+  }
+  // property (videogame) {
+  //   type (Videogame)
+  //   min (Required) max (One)
+  // } 
+  property (winner) {
+    type (EventWinner) 
+    min (Optional) max (One)
+  }
+}

@@ -1,0 +1,7 @@
+structure (MatchTeam) {
+  description (Team participating in a match)
+  extends (Team)
+  property (score) {
+    type (viv.core.Integer)
+  }
+}

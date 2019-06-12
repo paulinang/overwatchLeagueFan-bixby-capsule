@@ -1,0 +1,20 @@
+structure (EventWinner) {
+  description (Winner of event, can be team or player)
+  // usually team, but all-star games can have player winners
+  property (id) {
+    type (viv.core.Integer)
+    min (Optional) max (One)
+  }
+  property (type) {
+    type (EventWinnerType)
+    min (Optional) max (One)
+  }
+  property (player) {
+    type (Player)
+    min (Optional) max (One)
+  }
+  property (team) {
+    type (Team)
+    min (Optional) max (One)
+  }
+}

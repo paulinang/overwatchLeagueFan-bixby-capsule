@@ -1,0 +1,4 @@
+name (TeamAcronym) {
+  description (Acronym for team name)
+  // TODO: turn this to enum of all known OWL teams
+}

@@ -1,0 +1,25 @@
+structure (Team) {
+  description (An Overwatch league team)
+  property (id) {
+    type (TeamID)
+    min (Required) max (One)
+    visibility (Private)
+  }
+  property (name) {
+    type (TeamName)
+    min (Required) max (One)
+  }
+  property (imageUrl) {
+   type (viv.core.Text)
+    min (Optional) max (One)
+    visibility (Private)
+  }
+  property (acronym) {
+    type (TeamAcronym)
+    min (Optional) max (One)
+  }
+  // property (players) {
+  //   type (Player)
+  //   min (Optional) max (Many)
+  // }
+}

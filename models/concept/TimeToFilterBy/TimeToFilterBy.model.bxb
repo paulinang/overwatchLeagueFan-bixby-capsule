@@ -1,0 +1,14 @@
+structure (TimeToFilterBy) {
+  description (Filter events by this time)
+  property (queryString) {
+    description (ISO strings to pass to API to filter by time)
+    type (viv.core.Text)
+    min (Required) max (Many) 
+  }
+  
+  property (originalInput) {
+    description (Preserve original inputs for dialog)
+    type (OriginalTimeInput)
+    min (Required) max (One)
+  }
+}

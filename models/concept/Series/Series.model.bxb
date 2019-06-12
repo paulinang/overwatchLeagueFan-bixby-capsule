@@ -1,0 +1,4 @@
+structure (Series) {
+  description (Occurence of a league event ex. Season 1 2018)
+  extends (Event)
+}

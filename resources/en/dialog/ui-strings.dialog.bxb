@@ -1,0 +1,23 @@
+template-macro-def (overwatch) {
+  content: template ("Overwatch")
+}
+template-macro-def (overwatch-league) {
+  content: template ("Overwatch League")
+}
+
+template-macro-def (event-time) {
+  params {
+    param (time) { type (EventTime) min (Required) max (One) }
+    param (status) { type (EventStatus) min (Required) max (One) }
+  }
+  content {
+    if (exists(time.start)) {
+      if ("durationInUnit(time.start.date, now().date, 'DAYS') == 0") {
+          // starts/ends on same day
+        template ("Today at #{value(time.start.time)}")
+      } else {
+        template ("#{dateTime(time.start, 'EEE, MMM d')} at #{value(time.start.time)}")
+      }
+    }
+  }
+}

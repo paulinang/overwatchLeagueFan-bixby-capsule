@@ -1,0 +1,3 @@
+integer (MatchID) {
+  description (PandaScore ID for match to use in other API requests)
+}
