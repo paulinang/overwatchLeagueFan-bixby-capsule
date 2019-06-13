@@ -53,7 +53,6 @@ const binarySearch = (videos, startIndex, endIndex, matchStartTime, timezone) =>
           break
         }
       }
-      
       return videoMatches
     } else if (matchStartTime.isAfter(midVideoTime.atStartOfDay())) {
       // match happened after day of mid video -> get start to mid (left half of array) for later videos
@@ -74,8 +73,9 @@ const searchForPastVideo = (match, cursor) => {
     // means there are no more vidoes to get, so return empty (couldn't find any vids)
     return
   }
+  
   const matchStartTime =  new dates.ZonedDateTime.fromDateTime(match.time.start)
-  const timezone = match.time.start.time.timezone
+  const timezone = String(match.time.start.time.timezone)
   
   const videos = apiResponse.data ? apiResponse.data : apiResponse.data
   // update cursor
@@ -83,13 +83,17 @@ const searchForPastVideo = (match, cursor) => {
   const firstVidTime = new dates.ZonedDateTime.parseDateTime(videos[0].created_at).withZoneSameInstant(timezone) // first vid is most recent
   const lastVidTime = new dates.ZonedDateTime.parseDateTime(videos[videos.length - 1].created_at).withZoneSameInstant(timezone)
   // fast fail. get first 100 videos for overwatch league. if the date of match isn't between video 1 date and video 100 date, move to next 100
+  
   if (matchStartTime.isBeforeOrEqualTo(firstVidTime.atStartOfDay()) && matchStartTime.isAfterOrEqualTo(lastVidTime.atEndOfDay())) {
     // if matchStartTime is between start of first vid date and end of last vid date, the video match should be inside this 100 videos array
-    const videoMatches = binarySearch(videos, 0, videos.length - 1, matchStartTime, timezone)
-    return videoMatches.find((video) => {
-      let title = video.title
-      return title.indexOf('Full Match') > -1 && title.indexOf(match.opponents.teams[0].name) > -1 && title.indexOf(match.opponents.teams[0].name)
-    })
+    const videosOnMatchDate = binarySearch(videos, 0, videos.length - 1, matchStartTime, timezone)
+    if (videosOnMatchDate.length > 0) {
+      const videoMatch = videosOnMatchDate.find((video) => {
+        let title = video.title
+        return title.indexOf('Full Match') > -1 && title.indexOf(match.opponents.teams[0].name) > -1 && title.indexOf(match.opponents.teams[0].name)
+      })
+      return videoMatch
+    }
   } else {
     searchForPastVideo(match, cursor)
   }
@@ -98,15 +102,17 @@ const searchForPastVideo = (match, cursor) => {
 
 module.exports.function = function GetMatchVideoUrl (match) {
   console.log ('Getting twitch url for ', match)
+  const status = String(match.status) // enum convert to string
   // this only works for live and past games
-  if (match.status === 'Running') {
+  if (status === 'Running') {
     // live match, give link to Overwatch League twitch channel (it will be currently streaming)
     return config.get('twitchTv.overwatchLeague.url')
   }
-  if (match.status === 'Past' && match.seriesName !== 'All-stars') {
+  if (status === 'Past' && match.seriesName !== 'All-stars') {
     // if past match, have to search through all videos on OverwatchLeague channel
     // TODO: support all stars
-    return searchForPastVideo(match) ? searchForPastVideo(match).url : undefined
+    const videoMatch = searchForPastVideo(match)
+    return videoMatch.url ?  videoMatch.url : undefined
   }
   return
 }

@@ -1,12 +1,11 @@
  layout-macro-def(match-result-details) {
   params {
     param (match) { type (Match) min (Required) max (One) }
-    param (videoUrl) { type (MatchVideoUrl) min (Required) max (One)}
   }
   content {
     single-line {
       text {
-        value ("#{value(match.videoUrl)}")
+        value ("[#{value(match.videoUrl)}]")
       }
     }
   }
