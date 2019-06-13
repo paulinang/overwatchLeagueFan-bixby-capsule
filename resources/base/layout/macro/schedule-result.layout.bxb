@@ -10,10 +10,9 @@ layout-macro-def(schedule-result) {
   content {
     section {
       content {
-        // layout-macro (schedule-card) {
-        //   param (schedule) { expression (schedule) }
-        // }
-        // TODO: add a card for relevant series/ tournament info
+        layout-macro (schedule-overview) {
+          param (schedule) { expression (schedule) }
+        }
         
         if (size(schedule.matches) >= 1) {
           layout-macro (schedule-match-list) {

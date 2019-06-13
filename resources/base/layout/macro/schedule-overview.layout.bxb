@@ -1,0 +1,28 @@
+layout-macro-def(schedule-overview) {
+  params {
+    param (schedule) {
+      type (Schedule) min (Required) max (One)
+    }
+  }
+
+  content {
+    cell-card {
+      slot1 {
+        image {
+          url ("images/owl-logo.png")
+          background-color (White)
+          shape (Square)
+        }
+      }
+      slot2 {
+        if (size(schedule.series) == 1 && schedule.series[0].status == 'Running') {
+          content {
+            order (PrimarySecondary)
+            primary { template ("#{value(schedule.series[0].name)}[ - #{value(schedule.tournaments[0].name)}]")}
+            // secondary { template ("#{value(schedule.tournaments[0].name)}")}
+          }
+        }
+      }
+    }
+  }
+}

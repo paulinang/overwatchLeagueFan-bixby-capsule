@@ -1,11 +1,17 @@
 result-view {
-  match: ViewAll {
-    from-property: Schedule (schedule)
+  match: _ (this) {
+    from-property: Schedule (schedule) {
+      from-output :GetSchedule (action)
+    }
   }
 
   render {
-    layout-macro (schedule-result) {
-      param (schedule) { expression (schedule) }
+    list-of (schedule.matches) {
+      where-each (match) {
+        layout-macro (match-result-summary) {
+          param (match) { expression (match) }
+        }
+      }
     }
   }
 }

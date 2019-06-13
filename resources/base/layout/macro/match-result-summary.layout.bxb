@@ -1,0 +1,40 @@
+layout-macro-def(match-result-summary) {
+  params {
+    param (match) { type (Match) min (Required) max (One) }
+  }
+  content {
+    compound-card {
+      
+      content {
+        title-area {
+          slot1 {
+            single-line {
+              text {
+                value ("[#{macro('event-time', match.time, match.status)}]")
+                style (Title_XS)
+              }
+            }
+          }
+          slot2 {
+            single-line {
+              text {
+                value ("#{value(match.seriesName)} - #{value(match.tournamentName)}")
+                style (Detail_L_Soft)
+              }
+            }
+          }
+        }
+        divider
+        if (exists(match.opponents.teams)) {
+          layout-macro (match-team-hbox-1) {
+            param (team) { expression (match.opponents.teams) }
+            param (matchStatus) { expression (match.status) }
+          }
+          layout-macro (match-team-hbox-2) {
+            param (team) { expression (match.opponents.teams) }
+          }
+        }
+      }
+    }
+  }
+}

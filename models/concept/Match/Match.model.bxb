@@ -29,10 +29,22 @@ structure (Match) {
     visibility (Private)
   }
   
+  property (seriesName) {
+    type (EventName)
+    min (Required) max (One)
+    visibility (Private)
+  }
+  property (tournamentName) {
+    type (EventName)
+    min (Required) max (One)
+    visibility (Private)
+  }
+  
   // disable, data not available in free API :(
   // property (games) {
   //   type (MatchGame)
   //   lazy-source (GetMatchGames)
   //   min (Optional) max (Many)
   // }
+
 }

@@ -70,10 +70,9 @@ const buildMatch = (matchData, timezone) => {
   match.numberOfGames = matchData.number_of_games
   match.opponents = buildOpponents(matchData)
   // match.seriesID = matchData.serie_id
-  // match.seriesName = matchData.serie.full_name
+  match.seriesName = matchData.serie.full_name
   // match.tournamentID = matchData.tournament_id
-  // match.tournamentName = matchData.tournament.name
-  // match.leagueID = matchData.league_id
+  match.tournamentName = matchData.tournament.name
   // booleans
   match.isForfeit = matchData.forfeit
   match.isDraw = matchData.draw
