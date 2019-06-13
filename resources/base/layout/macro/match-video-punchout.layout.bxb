@@ -1,0 +1,12 @@
+//  layout-macro-def(match-result-details) {
+//   params {
+//     param (match) { type (Match) min (Required) max (One) }
+//   }
+//   content {
+//     single-line {
+//       text {
+//         value ("[#{value(match.videoUrl)}]")
+//       }
+//     }
+//   }
+// }

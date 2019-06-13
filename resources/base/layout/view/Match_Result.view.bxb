@@ -1,12 +1,17 @@
 result-view {
-  match: _ (this) {
+  match: Match(this) {
     from-property: Schedule (schedule) {
-      from-output :GetSchedule (action)
+      from-output: GetSchedule (action)
     }
   }
 
   render {
-    if (size(schedule.matches) >= 1) {
+    if (size(this) == 1) {
+      layout-macro (match-result-details) {
+        param (match) { expression (this[0]) }
+        param (videoUrl) { expression (this[0].videoUrl)}
+      }
+    } else-if (size(schedule.matches) > 1) {
       list-of (schedule.matches) {
         where-each (match) {
           layout-macro (match-result-summary) {

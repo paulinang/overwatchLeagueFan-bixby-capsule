@@ -1,0 +1,11 @@
+action (GetMatchVideoUrl) {
+  description (Get's the URL to the match's video on twitch)
+  type (Fetch)
+  collect {
+    input (match) {
+      type (Match)
+      min (Required) max (One)
+    }
+  }
+  output (MatchVideoUrl)
+}

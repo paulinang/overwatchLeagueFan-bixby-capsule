@@ -46,5 +46,10 @@ structure (Match) {
   //   lazy-source (GetMatchGames)
   //   min (Optional) max (Many)
   // }
-
+  
+  property (videoUrl) {
+    type (MatchVideoUrl)
+    lazy-source (GetMatchVideoUrl)
+    min (Optional) max (One)
+  }
 }

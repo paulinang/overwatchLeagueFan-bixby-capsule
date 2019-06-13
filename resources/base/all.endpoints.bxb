@@ -8,5 +8,9 @@ endpoints {
       accepted-inputs ($vivContext, time, status)
       local-endpoint (getSchedule.js)
     }
+    action-endpoint (GetMatchVideoUrl) {
+      accepted-inputs (match)
+      local-endpoint (getMatchVideoUrl.js)
+    }
   }
 }

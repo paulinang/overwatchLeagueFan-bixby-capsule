@@ -14,5 +14,6 @@ capsule {
     import (viv.entity) { as (entity) version (3.18.18) }
     import (viv.time) { as (time) version-from (entity) }
     import (viv.image) { as (image) version-from (entity) }
+    import (viv.punchoutToApp) { as (punchout) version(1.0.8) }
   }
 }
