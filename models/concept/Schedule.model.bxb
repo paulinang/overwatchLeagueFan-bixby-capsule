@@ -26,9 +26,9 @@ structure (Schedule) {
     min (Optional) max (Many)
   }
   
-  property (videogameUrl) {
+  property (leagueUrl) {
     type (viv.core.Text)
-    min (Optional) max (One)
+    min (Required) max (One)
     visibility (Private)
   }
 }

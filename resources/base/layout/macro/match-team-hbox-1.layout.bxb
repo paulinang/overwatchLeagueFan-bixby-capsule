@@ -30,7 +30,7 @@ layout-macro-def (match-team-hbox-1) {
               } else {
                 text {
                   value ("[#{value(team[0].score)} - #{value(team[1].score)}]")
-                  style (Title_S)
+                  style (Title_XS)
                 }
               }
             }

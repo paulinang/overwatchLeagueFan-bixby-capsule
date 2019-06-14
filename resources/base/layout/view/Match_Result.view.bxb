@@ -9,6 +9,7 @@ result-view {
     if (size(this) == 1) {
       layout-macro (match-result-details) {
         param (match) { expression (this[0]) }
+        param (leagueUrl) { expression (schedule.leagueUrl) }
       }
     } else-if (size(this) > 1) {
       list-of (this) {

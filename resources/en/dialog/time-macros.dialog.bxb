@@ -1,4 +1,4 @@
-template-macro-def (date-dialog) {
+template-macro-def (date) {
   params {
     param (date) { type (time.Date) min (Required) max (One) }
   }
@@ -17,7 +17,7 @@ template-macro-def (date-dialog) {
   }
 }
 
-template-macro-def (dateTime-dialog) {
+template-macro-def (dateTime) {
   params {
     param (dateTime) { type (time.DateTime) min (Required) max (One) }
   }
@@ -36,7 +36,7 @@ template-macro-def (dateTime-dialog) {
   }
 }
     
-template-macro-def (dateInterval-dialog) {
+template-macro-def (dateInterval) {
   params {
     param (dateInterval) { type (time.DateInterval) min (Required) max (One) }
   }
@@ -76,7 +76,7 @@ template-macro-def (dateInterval-dialog) {
   }
 }
 
-template-macro-def (duration-dialog) {
+template-macro-def (duration) {
   params {
     param (duration) { type (time.DurationPeriod) min (Required) max (One) }
   }

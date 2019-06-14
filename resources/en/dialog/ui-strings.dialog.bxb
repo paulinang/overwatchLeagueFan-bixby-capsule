@@ -5,19 +5,40 @@ template-macro-def (overwatch-league) {
   content: template ("Overwatch League")
 }
 
-template-macro-def (event-time) {
+template-macro-def (event-start-time) {
   params {
     param (time) { type (EventTime) min (Required) max (One) }
     param (status) { type (EventStatus) min (Required) max (One) }
   }
   content {
     if (exists(time.start)) {
-      if ("durationInUnit(time.start.date, now().date, 'DAYS') == 0") {
-          // starts/ends on same day
-        template ("Today at #{value(time.start.time)}")
+      if (status == 'Running') {
+        template ("LIVE since #{value(time.start.time)}")
       } else {
-        template ("#{dateTime(time.start, 'EEE, MMM d')} at #{value(time.start.time)}")
+        if ("durationInUnit(time.start.date, now().date, 'DAYS') == 0") {
+          template ("Today at #{value(time.start.time)}")
+        }
+        template ("#{title(dateTime(time.start, 'EEE, MMM d'))} at #{value(time.start.time)}")
       }
     }
   }
+}
+
+template-macro-def (watch-on-twitch) {
+  params {
+    param (status) { type (EventStatus) min (Required) max (One)}
+  }
+  content {
+    if (status == 'Past') {
+      template ("Watch VOD on Twitch")
+    } else-if (status == 'Running') {
+      template ("Watch live on Twitch")
+    } else {
+      template ("Visit Overwatch League on Twitch")
+    }
+  }
+}
+
+template-macro-def (visit-official-site) {
+  content: template ("Go to official site")
 }

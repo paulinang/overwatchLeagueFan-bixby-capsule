@@ -1,4 +1,5 @@
 let console = require('console')
+let config = require('config')
 
 const { getMatches } = require('./getMatches/main')
 const { getSeries } = require('./getSeries/main')
@@ -20,6 +21,7 @@ module.exports.function = function getSchedule ($vivContext, time, status) {
     all: true, // always true
     series: series,
     tournaments: tournaments,
-    matches: matches
+    matches: matches,
+    leagueUrl: config.get('overwatchLeague.url')
   }
 }

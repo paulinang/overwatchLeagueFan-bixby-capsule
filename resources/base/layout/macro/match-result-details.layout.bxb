@@ -1,11 +1,20 @@
  layout-macro-def(match-result-details) {
   params {
     param (match) { type (Match) min (Required) max (One) }
+    param (leagueUrl) { type (viv.core.Text) min (Required) max (One) }
   }
   content {
-    single-line {
-      text {
-        value ("[#{value(match.videoUrl)}]")
+    section {
+      content {
+       layout-macro (match-result-summary) {
+          param (match) { expression (match) }
+        }
+        layout-macro (match-video-punchout) {
+          param (match) { expression (match) }
+        }
+        layout-macro (official-site-punchout) {
+          param (url) { expression (leagueUrl) }
+        }
       }
     }
   }

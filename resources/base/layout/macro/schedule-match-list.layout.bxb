@@ -14,7 +14,7 @@ layout-macro-def (schedule-match-list) {
               slot1 {
                 single-line {
                   text {
-                    value ("[#{macro('event-time', match.time, match.status)}]")
+                    value ("[#{macro('event-start-time', match.time, match.status)}]")
                     style (Title_XS)
                   }
                 }

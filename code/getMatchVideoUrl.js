@@ -4,25 +4,7 @@ let console = require('console')
 let config = require('config')
 let secret = require ('secret')
 
-const getVideoAPIData = (cursor) => {
-  const BASE_URL = config.get('twitchTv.baseUrl') 
-  const ENDPOINT = 'videos'
-  const TWITCH_VIDEO_URL = BASE_URL + '/' +  ENDPOINT
-
-  const queryArgs = {
-    user_id: config.get('twitchTv.overwatchLeague.userID'),
-    type: 'highlight',
-    first: 100
-  }
-  if (cursor) {
-    queryArgs.after = cursor
-  }
-  return http.getUrl(TWITCH_VIDEO_URL, {
-    format: 'json',
-    query: queryArgs,
-    headers: {'client-ID': secret.get('twitchTv.clientID')}
-  })
-}
+const { getTwitchVideoAPIData } = require('./getTwitchVideo/client')
 
 const binarySearch = (videos, startIndex, endIndex, matchStartTime, timezone) => {
   if (endIndex >= startIndex) {
@@ -68,8 +50,8 @@ const binarySearch = (videos, startIndex, endIndex, matchStartTime, timezone) =>
 
 
 const searchForPastVideo = (match, cursor) => {
-  const apiResponse = getVideoAPIData(cursor)
-  if (apiResponse.error || !apiResponse.data) {
+  const apiResponse = getTwitchVideoAPIData(cursor)
+  if (apiResponse.error || !apiResponse.data || apiResponse.data.length === 0) {
     // means there are no more vidoes to get, so return empty (couldn't find any vids)
     return
   }
@@ -83,8 +65,7 @@ const searchForPastVideo = (match, cursor) => {
   const firstVidTime = new dates.ZonedDateTime.parseDateTime(videos[0].created_at).withZoneSameInstant(timezone) // first vid is most recent
   const lastVidTime = new dates.ZonedDateTime.parseDateTime(videos[videos.length - 1].created_at).withZoneSameInstant(timezone)
   // fast fail. get first 100 videos for overwatch league. if the date of match isn't between video 1 date and video 100 date, move to next 100
-  
-  if (matchStartTime.isBeforeOrEqualTo(firstVidTime.atStartOfDay()) && matchStartTime.isAfterOrEqualTo(lastVidTime.atEndOfDay())) {
+  if (matchStartTime.isBeforeOrEqualTo(firstVidTime.atEndOfDay()) && matchStartTime.isAfterOrEqualTo(lastVidTime.atStartOfDay())) {
     // if matchStartTime is between start of first vid date and end of last vid date, the video match should be inside this 100 videos array
     const videosOnMatchDate = binarySearch(videos, 0, videos.length - 1, matchStartTime, timezone)
     if (videosOnMatchDate.length > 0) {
@@ -95,7 +76,7 @@ const searchForPastVideo = (match, cursor) => {
       return videoMatch
     }
   } else {
-    searchForPastVideo(match, cursor)
+    return searchForPastVideo(match, cursor)
   }
 }
 
@@ -103,16 +84,14 @@ const searchForPastVideo = (match, cursor) => {
 module.exports.function = function GetMatchVideoUrl (match) {
   console.log ('Getting twitch url for ', match)
   const status = String(match.status) // enum convert to string
-  // this only works for live and past games
-  if (status === 'Running') {
-    // live match, give link to Overwatch League twitch channel (it will be currently streaming)
-    return config.get('twitchTv.overwatchLeague.url')
-  }
+  
   if (status === 'Past' && match.seriesName !== 'All-stars') {
     // if past match, have to search through all videos on OverwatchLeague channel
     // TODO: support all stars
     const videoMatch = searchForPastVideo(match)
     return videoMatch.url ?  videoMatch.url : undefined
+  } else {
+    // default to home page of user channel
+    return config.get('twitchTv.overwatchLeague.url')
   }
-  return
 }

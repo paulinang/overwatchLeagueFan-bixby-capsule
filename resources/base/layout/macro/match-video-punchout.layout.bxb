@@ -1,12 +1,32 @@
-//  layout-macro-def(match-result-details) {
-//   params {
-//     param (match) { type (Match) min (Required) max (One) }
-//   }
-//   content {
-//     single-line {
-//       text {
-//         value ("[#{value(match.videoUrl)}]")
-//       }
-//     }
-//   }
-// }
+ layout-macro-def (match-video-punchout) {
+  params {
+    param (match) { type (Match) min (Required) max (One) }
+  }
+  content {
+    if (exists(match.videoUrl)){
+      cell-card {
+        slot1 {
+          image {
+            url ("images/twitch-glitch-icon.png")
+            shape (Square)
+          }
+        }
+        slot2 {
+          content {
+            secondary {
+              template-macro (watch-on-twitch) {
+              param (status) { expression(match.status) }
+              }
+            }
+          }
+        }
+        on-click {
+          intent {
+            goal:  punchout.Punchout
+            value: punchout.PunchoutString$expr(match.videoUrl)
+          }
+        }
+      }
+    }
+  }
+}

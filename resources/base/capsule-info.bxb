@@ -1,7 +1,7 @@
 capsule-info {
   display-name (Overwatch League Fan)
   developer-name (Overwatch League Fan)
-  icon-asset (/images/owl-logo.png)
+  icon-asset (/images/capsule-icon.svg)
   description ("__DESCRIPTION__")
   website-url (https://example.com/)
   terms-url (https://example.com/terms-of-use/)

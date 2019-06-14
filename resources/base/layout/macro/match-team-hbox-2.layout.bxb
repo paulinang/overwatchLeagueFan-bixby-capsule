@@ -12,7 +12,7 @@ layout-macro-def (match-team-hbox-2) {
             content {
               text {
                 value ("[#{value(team[0].name)}]")
-                style (Detail_L)
+                style (Detail_M)
               }
             }
           }
@@ -29,7 +29,7 @@ layout-macro-def (match-team-hbox-2) {
             content {
               text {
                 value ("[#{value(team[1].name)}]")
-                style (Detail_L)
+                style (Detail_M)
               }
             }
           }
