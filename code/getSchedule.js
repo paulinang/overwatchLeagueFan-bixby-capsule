@@ -8,14 +8,19 @@ const { getTournaments } = require('./getTournaments/main')
 
 module.exports.function = function getSchedule ($vivContext, time, status) {
   console.log('Getting Overwatch League schedule')
-  
   const timezone = $vivContext.timezone
   
-  const series = getSeries(timezone, time, status)
-  const tournaments = getTournaments(timezone, time, status, series)
-  const matches = getMatches(timezone, time, status, tournaments)
+  let series, tournaments, matches
   
-  // matches[0].videoUrl = getMatchVideoUrl(matches[0])
+  // if user asked for a specific time/ status, we don't need to get series/ tournaments, just go straight to matches
+  if (time || status) {
+    matches = getMatches(timezone, time, status)
+  } else {
+    series = getSeries(timezone, time, status)
+    tournaments = getTournaments(timezone, time, status, series)
+    matches = getMatches(timezone, time, status, tournaments)
+    
+  }
   
   return {
     all: true, // always true

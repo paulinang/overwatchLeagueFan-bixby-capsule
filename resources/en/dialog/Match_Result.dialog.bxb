@@ -1,0 +1,11 @@
+dialog (Result) {
+  match: _ (this) {
+    from-property: Schedule (schedule) {
+      from-output: GetSchedule (action)
+    }
+  }
+  if (exists(action.time)) {
+    template ("I found #{size(schedule.matches)} #{concept(schedule.matches)} scheduled #{input(action.time)}:")
+  }
+  template ("I found #{size(schedule.matches)} [#{lower(value(action.status))} ]#{concept(schedule.matches)}[ scheduled #{input(action.time)}]:")
+}
