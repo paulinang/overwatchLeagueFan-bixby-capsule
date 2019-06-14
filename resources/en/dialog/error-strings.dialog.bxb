@@ -1,0 +1,9 @@
+template-macro-def (datetime-input-not-allowed) {
+  params {
+    param (dateTime) { type (time.DateTime) min (Required) max (One) }
+  }
+  content {
+    template ("I can't search by a specific time, expanding to the whole day.")
+    // template ("I can't search by a specific time, expanding to the full day of #{value(dateTime.date)}.")
+  }
+}

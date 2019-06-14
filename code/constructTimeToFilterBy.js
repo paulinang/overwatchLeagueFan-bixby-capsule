@@ -1,12 +1,18 @@
 let dates = require('dates')
 let console = require('console')
+let fail = require('fail')
 
 module.exports.function = function constructTimeToFilterBy (duration, date, dateTime, dateInterval, dateTimeInterval) {
   
   let queryString = []
   
   if (dateTime) {
-    queryString.push(new dates.ZonedDateTime.fromDateTime(dateTime).toIsoString())
+    throw fail.checkedError(
+      'Datetime requested, use date instead',
+      'DateTimeInputNotAllowed',
+      { dateTime: dateTime }
+    )
+    // queryString.push(new dates.ZonedDateTime.fromDateTime(dateTime).toIsoString())
   } else if (date) {
     queryString.push(new dates.ZonedDateTime.fromDate(date).atStartOfDay().toIsoString())
     queryString.push(new dates.ZonedDateTime.fromDate(date).atEndOfDay().toIsoString())
@@ -23,6 +29,8 @@ module.exports.function = function constructTimeToFilterBy (duration, date, date
     }
     if (dateTimeInterval.end) {
       queryString.push(new dates.ZonedDateTime.fromDateTime(dateTimeInterval.end).toIsoString())
+    } else {
+      queryString.push(new dates.ZonedDateTime.fromDateTime(dateTimeInterval.start).atEndOfDay().toIsoString())
     }
   } else if (duration) {
     queryString.push(new dates.ZonedDateTime.now().toIsoString())

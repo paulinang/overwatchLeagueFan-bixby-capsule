@@ -52,5 +52,24 @@ action (ConstructTimeToFilterBy) {
     }
   }
   
-  output (TimeToFilterBy)
+  output (TimeToFilterBy) {
+    throws {
+      error (DateTimeInputNotAllowed) {
+        property (dateTime) {
+          type (time.DateTime) min (Required) max (One)
+        }
+        on-catch {
+          replan {
+            dialog {
+              template ("#{macro('datetime-input-not-allowed', dateTime)}")
+            }
+            intent {
+              goal: TimeToFilterBy
+              value: time.Date$expr (dateTime.date)
+            }
+          }
+        }
+      }
+    }
+  }
 }
