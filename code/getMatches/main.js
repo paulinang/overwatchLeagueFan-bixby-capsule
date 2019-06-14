@@ -17,6 +17,7 @@ const getMatches = (timezone, time, status, tournaments) => {
   console.log('Getting matches')
   
   let apiResponse
+  
   if (!time && !status && tournaments) {
     // user gave no inputs, there should be a relevant tournament(s) to get matches for
     let runningTournament, lastTournament, nextTournament

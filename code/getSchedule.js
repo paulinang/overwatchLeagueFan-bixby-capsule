@@ -13,14 +13,12 @@ module.exports.function = function getSchedule ($vivContext, time, status) {
   let series, tournaments, matches
   
   // if user asked for a specific time/ status, we don't need to get series/ tournaments, just go straight to matches
-  if (time || status) {
-    matches = getMatches(timezone, time, status)
-  } else {
+  if (!time) {
     series = getSeries(timezone, time, status)
     tournaments = getTournaments(timezone, time, status, series)
-    matches = getMatches(timezone, time, status, tournaments)
-    
   }
+  
+  matches = getMatches(timezone, time, status, tournaments)
   
   return {
     all: true, // always true

@@ -29,16 +29,54 @@ const getMatchAPIData = (time, status, count, tournament) => {
     queryArgs['filter[tournament_id]'] = tournament.id
   }
   
+  let results = []
   if (count) {
-    queryArgs['page[size]'] = count
+    if (count <= 100) {
+      // under 100 (max per page), no need to paginate, just 1 request
+      queryArgs['page[size]'] = count
+      console.log('Sending request at:', MATCHURL, queryArgs)
+      results = results.concat(http.getUrl(MATCHURL, { format: 'json', query: queryArgs }))
+    } else {
+      // keep requesting page by page, until we hit count or there are no more matches left
+      let remainingCount = count - 100
+      let currentPage = 1
+      let response
+      while (remainingCount > 0) {
+        queryArgs['page[size]'] = remainingCount > 100 ? 100 : remainingCount
+        queryArgs['page[number]'] = currentPage
+        console.log('Sending request at:', MATCHURL, queryArgs)
+        response = http.getUrl(MATCHURL, { format: 'json', query: queryArgs })
+        if (response && response.length > 0) {
+          results = results.concat(response)
+        } else {
+          break
+        }
+        remainingCount -= 100
+        currentPage ++
+      }
+    }
+  } else {
+    // get max/ page and keep getting more until api returns empty
+    queryArgs['page[size]'] = 100
+    queryArgs['page[number]'] = 1
+    console.log('Sending request at:', MATCHURL, queryArgs)
+    let response = http.getUrl(MATCHURL, { format: 'json', query: queryArgs })
+    while (response && response.length > 0) {
+      results = results.concat(response)
+      if (response.length === 100) {
+        // managed to get 100 matches, check next page to see if there is still more
+        currentPage ++
+        queryArgs['page[number]'] ++
+        console.log('Sending request at:', MATCHURL, queryArgs)
+        response = http.getUrl(MATCHURL, { format: 'json', query: queryArgs })
+      } else {
+        // didn't make it to max 100 matches per page, so there can't be anymore
+        break
+      }
+    }
   }
   
-  console.log('Sending request at:', MATCHURL, queryArgs)
-  
-  return http.getUrl(MATCHURL, {
-    format: 'json',
-    query: queryArgs
-  })
+  return results
 }
 
 module.exports = {
