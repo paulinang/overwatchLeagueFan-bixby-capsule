@@ -1,6 +1,6 @@
 module.exports = {
   'canceled': 'Canceled',
   'finished': 'Past',
-  'running': 'Running',
+  'running': 'InProgress',
   'not_started': 'Upcoming'
 }

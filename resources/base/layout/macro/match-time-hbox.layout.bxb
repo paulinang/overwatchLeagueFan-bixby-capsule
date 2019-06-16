@@ -8,7 +8,7 @@ layout-macro-def (match-time-hbox) {
         vbox {
           content {
             single-line {
-              if (match.status == 'Running') {
+              if (match.status == 'InProgress') {
                 image {
                   url ("images/live-match-icon.png") 
                   style (Detail_M)

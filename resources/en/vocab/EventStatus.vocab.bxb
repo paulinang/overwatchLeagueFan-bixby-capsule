@@ -16,9 +16,9 @@ vocab (EventStatus) {
     "past"
     "over"
   }
-   "Running" {
-    "running"
+   "InProgress" {
     "current"
+    "currently"
     "in progress"
   }
 }

@@ -12,7 +12,7 @@ template-macro-def (event-start-time) {
   }
   content {
     if (exists(time.start)) {
-      if (status == 'Running') {
+      if (status == 'InProgress') {
         template ("LIVE since #{value(time.start.time)}")
       } else {
         if ("durationInUnit(time.start.date, now().date, 'DAYS') == 0") {
@@ -31,7 +31,7 @@ template-macro-def (watch-on-twitch) {
   content {
     if (status == 'Past') {
       template ("Watch VOD on Twitch")
-    } else-if (status == 'Running') {
+    } else-if (status == 'InProgress') {
       template ("Watch live on Twitch")
     } else {
       template ("Visit Overwatch League on Twitch")

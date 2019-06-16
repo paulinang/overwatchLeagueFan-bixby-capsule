@@ -15,11 +15,10 @@ layout-macro-def(schedule-overview) {
         }
       }
       slot2 {
-        if (size(schedule.series) == 1 && schedule.series[0].status == 'Running') {
+        if (size(schedule.series) == 1 && schedule.series[0].status == 'InProgress') {
           content {
             order (PrimarySecondary)
             primary { template ("#{value(schedule.series[0].name)}[ - #{value(schedule.tournaments[0].name)}]")}
-            // secondary { template ("#{value(schedule.tournaments[0].name)}")}
           }
         }
       }
