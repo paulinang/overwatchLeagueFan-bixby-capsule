@@ -7,5 +7,6 @@ dialog (Result) {
   if (exists(action.time)) {
     template ("I found #{size(schedule.matches)} #{concept(schedule.matches)} scheduled #{input(action.time)}:")
   }
-  template ("I found #{size(schedule.matches)} [#{lower(value(action.status))} ]#{concept(schedule.matches)}[ scheduled #{input(action.time)}]:")
+  
+  template ("I found #{size(schedule.matches)} #{concept(schedule.matches)}:")
 }

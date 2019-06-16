@@ -6,10 +6,6 @@ action (GetSchedule) {
       type (TimeToFilterBy)
       min (Optional) max (One)
     }
-    input (status) {
-      type (EventStatus)
-      min (Optional) max (One)
-    }
   }
   output (Schedule)
 }
