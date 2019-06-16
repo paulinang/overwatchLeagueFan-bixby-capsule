@@ -12,7 +12,7 @@ const getSeries = (timezone, time, status) => {
     apiResponse = getSeriesAPIData(time, 'running', 1)
     
     if (!apiResponse || apiResponse.length === 0) {
-      // no running series -> get last series and next series
+      // no in progress series -> get last series and next series
       const lastSeries = getSeriesAPIData(time, 'past', 1)
       const nextSeries = getSeriesAPIData(time, 'upcoming', 1)
       

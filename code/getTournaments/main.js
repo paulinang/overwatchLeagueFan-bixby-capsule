@@ -21,11 +21,11 @@ const getTournaments = (timezone, time, status, series) => {
   let apiResponse
   if (!time && !status && series) {
     // user gave no inputs, there should be a relevant series to get tournaments for
-    let runningSeries, lastSeries, nextSeries
+    let currentSeries, lastSeries, nextSeries
     let lastTournament, nextTournament
     series.forEach((x) => {
-      if (x.status === 'Running') {
-        runningSeries = x
+      if (x.status === 'InProgress') {
+        currentSeries = x
       } else if (x.status === 'Past') {
         lastSeries = x
       } else if (x.status === 'Upcoming') {
@@ -34,22 +34,22 @@ const getTournaments = (timezone, time, status, series) => {
     })
     
     // user gave no inputs, there should be a relevant series to get tournaments for
-    if (runningSeries) {
-      // if there is a series running
-      // try to get running tournament first
-      apiResponse = getTournamentAPIData(time, 'running', 1, runningSeries)
+    if (currentSeries) {
+      // if there is a series in progress
+      // try to get in progress tournament first
+      apiResponse = getTournamentAPIData(time, 'running', 1, currentSeries)
 
       if (!apiResponse || apiResponse.length === 0) {
-        // no running tournament -> get last tourney and next tourney
-        lastTournament = getTournamentAPIData(time, 'past', 1, runningSeries)
-        nextTournament = getTournamentAPIData(time, 'upcoming', 1, runningSeries)
-        apiResponse = concatLastNextTournaments(lastTorunament, nextTournament)
+        // no in progress tournament -> get last tourney and next tourney
+        lastTournament = getTournamentAPIData(time, 'past', 1, currentSeries)
+        nextTournament = getTournamentAPIData(time, 'upcoming', 1, currentSeries)
+        apiResponse = concatLastNextTournaments(lastTournament, nextTournament)
       }
     } else {
-      // there are series but not running (so there'll be past and future)
+      // there are series but not in progress (so there'll be past and future)
       lastTournament = getTournamentAPIData(time, 'past', 1, lastSeries || nextSeries)
       nextSeries = getTournamentAPIData(time, 'past', 1, lastSeries || nextSeries)
-      piResponse = concatLastNextTournaments(lastTorunament, nextTournament)
+      piResponse = concatLastNextTournaments(lastTournament, nextTournament)
     }
   } else {
     // user requested a time and/or status

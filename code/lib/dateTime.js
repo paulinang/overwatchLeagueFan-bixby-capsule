@@ -18,7 +18,7 @@ const getEventStatusByTime = (eventTime) => {
     // no end, or end if after now
     if (eventStart.isBeforeOrEqualTo(now)) {
       // if event has started
-      return 'Running'
+      return 'InProgress'
     } else if (eventStart.isAfter(now)) {
       // event hasn't started
       return 'Upcoming'
