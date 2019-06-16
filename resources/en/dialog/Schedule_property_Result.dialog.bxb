@@ -1,0 +1,38 @@
+dialog (Result) {
+  match: _ (this) {
+    from-property: Schedule (schedule) {
+      from-output: GetSchedule (action)
+    }
+  }
+  if (exists(action.time)) {
+    template ("I found #{size(schedule.matches)} #{concept(schedule.matches)} scheduled #{input(action.time)}:")
+    
+  } else {
+    //// USER GAVE NO INPUT ////
+    if (size(schedule.series) == 1 && schedule.series[0].status == 'InProgress') {
+      ///// SERIES IN PROGRESS /////
+      if (size(schedule.tournaments) == 1 && schedule.tournaments[0].status == 'InProgress') {
+        if (size(schedule.matches) > 0) {
+          if (durationInUnit(schedule.matches[0].time.start.date, now().date, 'DAYS') == 0) {
+            template ("#{value(schedule.series[0].name)}, #{value(schedule.tournaments[0].name)} is currently in progress. Here are the #{size(schedule.matches)} #{concept(schedule.matches)} scheduled today:")
+          } else-if (exists(schedule.matches[0].time.start) && isFuture(schedule.matches[0].time.start)) {
+              template ("#{value(schedule.series[0].name)}, #{value(schedule.tournaments[0].name)} is currently in progress. There will be #{size(schedule.matches)} #{concept(schedule.matches)} on #{value(schedule.matches[0].time.start.date)}.")
+          } else-if (exists(schedule.matches[0].time.start) && isPast(schedule.matches[0].time.start)) {
+              template ("#{value(schedule.series[0].name)}, #{value(schedule.tournaments[0].name)} is currently in progress. There were #{size(schedule.matches)} #{concept(schedule.matches)} on #{value(schedule.matches[0].time.start.date)}.")
+          }
+        }
+      } else {
+        // TODO: dialog about last tournament's winners, and when next series will begin
+        template ("#{value(schedule.series[0].name)}, #{value(schedule.tournaments[0].name)} is currently in progress.")
+      }
+      template ("#{value(schedule.series[0].name)}, #{value(schedule.tournaments[0].name)} is currently in progress.")
+      
+    } else {
+      //// OFF SEASON /////
+      template ("Overwatch League is in its off season.")
+      // TODO: off season dialog - last serie's winners, when will new series begin
+    }
+  }
+  
+  template ("I found #{size(schedule.matches)} #{concept(schedule.matches)}:")
+}
