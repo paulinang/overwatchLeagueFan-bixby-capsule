@@ -11,6 +11,7 @@ action (GetSchedule) {
     throws {
       error (OffSeason) {
         on-catch {
+          // TODO: replan to get off season data - last season's results + next season's start date
           halt {
             dialog {
               template ("#{macro('off-season')}")
