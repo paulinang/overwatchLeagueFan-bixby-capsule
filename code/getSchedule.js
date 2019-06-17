@@ -41,7 +41,7 @@ module.exports.function = function getSchedule ($vivContext, time) {
   
   return {
     all: true, // always true
-    currentSeries: currentSeries ? currentSeries : undefined,
+    series: currentSeries ? currentSeries : undefined,
     tournaments: currentTournament  ? currentTournament : undefined,
     matches: matches,
     leagueUrl: config.get('overwatchLeague.url')
