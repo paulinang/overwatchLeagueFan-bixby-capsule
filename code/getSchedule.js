@@ -9,8 +9,7 @@ const { getTournaments } = require('./getTournaments/main')
 module.exports.function = function getSchedule ($vivContext, time) {
   console.log('Getting Overwatch League schedule')
   const timezone = $vivContext.timezone
-  
-  let series, tournaments, matches
+  let matches
   
   if (!time) {
     // ex. "Get me the schedule" "What's the league schedule"
@@ -42,8 +41,8 @@ module.exports.function = function getSchedule ($vivContext, time) {
   
   return {
     all: true, // always true
-    series: currentSeries ? currentSeries : series,
-    tournaments: currentTournament  ? currentTournament : tournaments,
+    currentSeries: currentSeries ? currentSeries : undefined,
+    tournaments: currentTournament  ? currentTournament : undefined,
     matches: matches,
     leagueUrl: config.get('overwatchLeague.url')
   }
