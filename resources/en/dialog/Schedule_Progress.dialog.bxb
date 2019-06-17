@@ -1,0 +1,6 @@
+dialog (Progress) {
+  match: Schedule {
+    from-output: GetSchedule
+  }
+  template("Getting the schedule...")
+}
