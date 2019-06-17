@@ -1,10 +1,3 @@
-template-macro-def (overwatch) {
-  content: template ("Overwatch")
-}
-template-macro-def (overwatch-league) {
-  content: template ("Overwatch League")
-}
-
 template-macro-def (event-start-time) {
   params {
     param (time) { type (EventTime) min (Required) max (One) }
@@ -24,9 +17,41 @@ template-macro-def (event-start-time) {
   }
 }
 
+//////////////////////////////////////////////////
+////////////     LIST NAVIGATION     /////////////
+//////////////////////////////////////////////////
+template-macro-def (match-list-summary) {
+  params {
+    param (matches) {
+      type (Match) min (Required) max (Many)
+    }
+  }
+  
+  content {
+    if (size(matches) > 4) {
+      template ("#{event(matches, 'Result')} Here are the first 4")
+    }
+  } 
+}
+template-macro-def (match-nav-first-page) {
+  content: template ("Here is the first page of matches.")
+}
+
+template-macro-def (match-nav-next-page) {
+  content: template ("Want to see more?")
+}
+template-macro-def (match-nav-last-page) {
+  content: template ("That's all the matches I've found.")
+}
+
+//////////////////////////////////////////////////
+////////////////     PUNCHOUT     ////////////////
+//////////////////////////////////////////////////
 template-macro-def (watch-on-twitch) {
   params {
-    param (status) { type (EventStatus) min (Required) max (One)}
+    param (status) {
+      type (EventStatus) min (Required) max (One)
+    }
   }
   content {
     if (status == 'Past') {

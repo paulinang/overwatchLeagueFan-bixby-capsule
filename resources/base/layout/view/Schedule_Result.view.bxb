@@ -5,15 +5,28 @@ result-view {
     }
   }
 
-  render {
-    if (size(schedule.matches) >= 1) {
+  render {if (size(schedule.matches) > 1) {
       list-of (schedule.matches) {
         where-each (match) {
           layout-macro (match-result-summary) {
             param (match) { expression (match) }
           }
         }
+        // Match_Result.view.bxb specifies what to render for a match detail
         has-details (true)
+        
+        // pagination
+        navigation-mode {
+          read-many-and-next {
+            page-size (4)
+            list-summary ("#{macro('match-list-summary', schedule.matches)}")
+            page-content {
+              underflow-statement ("#{macro('match-nav-first-page')}") // TODO: this doesn't show, I added it to match-list-summary
+              next-page-question ("#{macro('match-nav-next-page')}")
+              overflow-statement ("#{macro('match-nav-last-page')}")
+            }
+          }
+        }
       }
     }
   }

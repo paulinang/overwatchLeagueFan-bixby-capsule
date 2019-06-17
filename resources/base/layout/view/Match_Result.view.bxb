@@ -6,19 +6,11 @@ result-view {
   }
 
   render {
+    // need this for dive to details of match list  in Schedule_Result.view.bxb
     if (size(this) == 1) {
       layout-macro (match-result-details) {
         param (match) { expression (this[0]) }
         param (leagueUrl) { expression (schedule.leagueUrl) }
-      }
-    } else-if (size(this) > 1) {
-      list-of (this) {
-        where-each (match) {
-          layout-macro (match-result-summary) {
-            param (match) { expression (this) }
-          }
-        }
-        has-details (true)
       }
     }
   }
