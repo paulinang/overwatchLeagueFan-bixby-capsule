@@ -6,8 +6,8 @@ let secret = require ('secret')
 const BASEURL = config.get('pandaScore.baseUrl')
 const LEAGUEID = config.get('pandaScore.league.id')
 
-const getMatchAPIData = (time, status, count, tournament) => {
-  console.log('Getting match API data')
+const getMatchAPIData = (time, status, tournament, count) => {
+  console.log(time, status, tournament, count)
   const ENDPOINT = status ? 'matches/' + status.toLowerCase() : 'matches'
   const MATCHURL = BASEURL + '/' +  ENDPOINT
   

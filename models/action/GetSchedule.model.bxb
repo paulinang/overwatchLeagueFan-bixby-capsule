@@ -7,5 +7,17 @@ action (GetSchedule) {
       min (Optional) max (One)
     }
   }
-  output (Schedule)
+  output (Schedule) {
+    throws {
+      error (OffSeason) {
+        on-catch {
+          halt {
+            dialog {
+              template ("#{macro('off-season')}")
+            }
+          }
+        }
+      }
+    }
+  }
 }

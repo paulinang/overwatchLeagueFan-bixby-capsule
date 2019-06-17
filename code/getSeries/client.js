@@ -7,7 +7,6 @@ const BASEURL = config.get('pandaScore.baseUrl')
 const LEAGUEID = config.get('pandaScore.league.id')
 
 const getSeriesAPIData = (time, status, count) => {
-  console.log('Getting series API data')
   const ENDPOINT = status ? 'series/' + status.toLowerCase() : 'series'
   const SERIESURL = BASEURL + '/' +  ENDPOINT
   
