@@ -7,3 +7,7 @@ template-macro-def (datetime-input-not-allowed) {
     // template ("I can't search by a specific time, expanding to the full day of #{value(dateTime.date)}.")
   }
 }
+
+template-macro-def (off-season) {
+  content: template ("Overwatch League is currently in off season.")
+}

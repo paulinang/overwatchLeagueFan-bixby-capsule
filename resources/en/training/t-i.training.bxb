@@ -1,0 +1,5 @@
+train (t-i9rgsic0rvsvpa59qi9imfndn) {
+  utterance ("[g:Schedule#all] Matches (today)[v:time.DateTimeExpression]")
+  plan (lcrNCsIwEATgsf49hKAgeM3FJ/CvXrxZvIe4tIGYlGTb6sVnN/UgIuTgwsIM82GKee1K4VrynWRVnUiWDeXSioumbmMMFon9rCq6NoawTIAj8cesEqbQNypcrg2T3z4gEmznbGDfKP7x6//8s6vIYtbqVnAcxF4y9eJwrz2FoJ3FBANkGGKEccz4alnMeH9/fYv7Cw==)
+  last-modified (1560742538701)
+}

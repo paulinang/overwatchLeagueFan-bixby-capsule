@@ -5,7 +5,8 @@ result-view {
     }
   }
 
-  render {if (size(schedule.matches) > 1) {
+  render {
+    if (size(schedule.matches) > 1) {
       list-of (schedule.matches) {
         where-each (match) {
           layout-macro (match-result-summary) {
@@ -27,6 +28,11 @@ result-view {
             }
           }
         }
+      }
+    } else-if (size(schedule.matches) == 1) {
+      layout-macro (match-result-details) {
+        param (match) { expression (schedule.matches[0]) }
+        param (leagueUrl) { expression (schedule.leagueUrl) }
       }
     }
   }

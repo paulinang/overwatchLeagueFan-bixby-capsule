@@ -1,7 +1,12 @@
 train (t-xaqrcixr8xodyl7g8snn6xq0y) {
-  utterance ("[g:pog.overwatchLeagueFan.Schedule#all] What was the schedule (yesterday)[v:time.DateTimeExpression]")
+  utterance ("[g:Schedule#all] What was the schedule (yesterday)[v:time.DateTimeExpression]")
   plan (lcrNCsIwEATgsf49hKAgeM3FJ/CvXrxZvIe4tIGYlGTb6sVnN/UgIuTgwsIM82GKee1K4VrynWRVnUiWDeXSioumbmMMFon9rCq6NoawTIAj8cesEqbQNypcrg2T3z4gEmznbGDfKP7x6//8s6vIYtbqVnAcxF4y9eJwrz2FoJ3FBANkGGKEccz4alnMeH9/fYv7Cw==)
-  last-modified (1560528279258)
+  last-modified (1560742543775)
+}
+train (t-xtrdqgeew8ftfdeuxiew4l22p) {
+  utterance ([g:Schedule#all] Get me the Overwatch League schedule)
+  plan (Y2BikCvIT9fLL0stKk8sSc7wSU1ML011S8zTC8tMLXfMyWGQxyEfnJyRmlKak8rACIQMDExADGYBAA==)
+  last-modified (1560742600207)
 }
 train (t-xv73vqj4niamxgk0h94rmgtgp) {
   utterance ("[g:Schedule#all] Was there a match (yesterday at 5pm)[v:time.DateTimeExpression]")

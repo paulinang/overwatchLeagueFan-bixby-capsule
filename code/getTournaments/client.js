@@ -6,7 +6,6 @@ let secret = require ('secret')
 const BASEURL = config.get('pandaScore.baseUrl')
 
 const getTournamentAPIData = (time, status, count, series) => {
-  console.log('Getting series API data')
   const ENDPOINT = status ? 'tournaments/' + status.toLowerCase() : 'tournaments'
   const TOURNAMENTURL = BASEURL + '/' +  ENDPOINT
   
