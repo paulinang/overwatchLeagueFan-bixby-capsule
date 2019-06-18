@@ -42,8 +42,8 @@ template-macro-def (dateInterval) {
   }
   content {
     if (exists(dateInterval.parseTree.explicitOffsetFromNow)) {
-      if (dateInterval.parseTree.relativeNamedDateInterval == 'Week') {
-        template ("#{lower(dateInterval.parseTree.explicitOffsetFromNow)} week")
+      if (exists(dateInterval.parseTree.relativeNamedDateInterval)) {
+        template ("#{lower(dateInterval.parseTree.explicitOffsetFromNow)} #{lower(dateInterval.parseTree.relativeNamedDateInterval)}")
       } else-if (exists(dateInterval.parseTree.datePeriod)) {
         // dateperiod value not working, so join inner properties
         template ("for the #{lower(dateInterval.parseTree.explicitOffsetFromNow)}[  #{joinAs('value', dateInterval.parseTree.datePeriod.periodYears, dateInterval.parseTree.datePeriod.periodMonths, dateInterval.parseTree.datePeriod.periodWeeks, dateInterval.parseTree.datePeriod.periodDays, dateInterval.parseTree.datePeriod.periodNights)}]")
