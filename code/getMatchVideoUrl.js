@@ -10,9 +10,18 @@ const parseTwitchTime = (twitchTime, timezone) => {
   }
 }
 
-const binarySearch = (videos, startIndex, endIndex, matchEndTime, timezone, teams) => {
+const checkTeamsInVideo = (title, matchType, teams) => {
+  if (matchType === 'Official All-Star Game') {
+    // all stars doesnt have teams in video
+    return true
+  } else {
+    return title.indexOf(teams[0].name) > -1 && title.indexOf(teams[0].name) > -1
+  }
+}
+
+const binarySearch = (videos, startIndex, endIndex, matchEndTime, timezone, matchType, teams) => {
   // binary search a 100 videos (sorted from most to least recent)
-  // returns the video that is a 'Full Match' for teams provided on the correct date
+  // returns the video that has correct matchType (full match or all-stars), teams, and date
   if (endIndex >= startIndex) {
     // there are still videos to search, get mid index
     const midIndex = Math.floor(startIndex + (endIndex - startIndex) / 2)
@@ -23,7 +32,7 @@ const binarySearch = (videos, startIndex, endIndex, matchEndTime, timezone, team
       // match happened during day of mid video -> use mid index to get all surrounding videos with that date
 
       let midVideo = videos[midIndex]
-      if (midVideo.title.indexOf('Full Match') >  -1 && midVideo.title.indexOf(teams[0].name) > -1 && midVideo.title.indexOf(teams[0].name) > -1) {
+      if (midVideo.title.indexOf(matchType) >  -1 && checkTeamsInVideo(midVideo.title, matchType, teams)) {
         return midVideo
       }
       
@@ -32,8 +41,8 @@ const binarySearch = (videos, startIndex, endIndex, matchEndTime, timezone, team
         let leftVid = videos[leftIndex]
         let leftVidDateStart = parseTwitchTime(leftVid.created_at, timezone).atStartOfDay()
         let leftVidDateEnd = parseTwitchTime(leftVid.created_at, timezone).atEndOfDay()
-        
-        if (leftVid.title.indexOf('Full Match') === -1) {
+
+        if (leftVid.title.indexOf(matchType) === -1) {
           // quickly move on to next vid on the left if title doesn't include full match
           leftIndex --
           continue
@@ -41,7 +50,7 @@ const binarySearch = (videos, startIndex, endIndex, matchEndTime, timezone, team
         
         if (matchEndTime.isAfterOrEqualTo(leftVidDateStart) && matchEndTime.isBeforeOrEqualTo(leftVidDateEnd)) {
           // correct video creation date -> match ended on same date
-          if (leftVid.title.indexOf(teams[0].name) > -1 && leftVid.title.indexOf(teams[0].name) > -1) {
+          if (checkTeamsInVideo(leftVid.title, matchType, teams)) {
             // correct title (has both teams) -> all criteria met, return vid!
             return leftVid
           } else {
@@ -60,7 +69,7 @@ const binarySearch = (videos, startIndex, endIndex, matchEndTime, timezone, team
         let rightVidDateStart = parseTwitchTime(rightVid.created_at, timezone).atStartOfDay()
         let rightVidDateEnd = parseTwitchTime(rightVid.created_at, timezone).atEndOfDay()
 
-        if (rightVid.title.indexOf('Full Match') === -1) {
+        if (rightVid.title.indexOf(matchType) === -1) {
           // quickly move on to next vid on the right if title doesn't include full match
           rightIndex ++
           continue
@@ -68,7 +77,7 @@ const binarySearch = (videos, startIndex, endIndex, matchEndTime, timezone, team
 
         if (matchEndTime.isAfterOrEqualTo(rightVidDateStart) && matchEndTime.isBeforeOrEqualTo(rightVidDateEnd)) {
           // correct video creation date -> match ended on same date
-          if (rightVid.title.indexOf(teams[0].name) > -1 && rightVid.title.indexOf(teams[0].name) > -1) {
+          if (checkTeamsInVideo(rightVid.title, matchType, teams)) {
             // correct title (has both teams) -> all criteria met, return vid!
             return rightVid
           } else {
@@ -82,10 +91,10 @@ const binarySearch = (videos, startIndex, endIndex, matchEndTime, timezone, team
       }
     } else if (matchEndTime.isAfter(midVideoDateStart)) {
       // match happened after day of mid video -> get start to mid (left half of array) for later videos
-      return binarySearch(videos, startIndex, midIndex - 1, matchEndTime, timezone, teams)
+      return binarySearch(videos, startIndex, midIndex - 1, matchEndTime, timezone, matchType, teams)
     } else {
       // match happened start day of mid video -> get mid to end (right half) for earlier videos
-      return binarySearch(videos, midIndex - 1, endIndex, matchEndTime, timezone, teams)
+      return binarySearch(videos, midIndex - 1, endIndex, matchEndTime, timezone, matchType, teams)
     }
   }
 }
@@ -116,7 +125,8 @@ const searchForPastVideo = (match, cursor) => {
   // we only search within the 100 videos if the match ended/ video could have been created between the times of first and last vid
   if (matchEndTime.isAfterOrEqualTo(lastVidTime.atStartOfDay()) && matchEndTime.isBeforeOrEqualTo(firstVidTime.atEndOfDay())) {
     // binary search videos as they are sorted by time to get all 'Full Match' videos on the match date
-    const videoMatch = binarySearch(videos, 0, videos.length - 1, matchEndTime, timezone, match.opponents.teams)
+    const matchType = String(match.tournamentName) === 'All-stars' ? 'Official All-Star Game' : 'Full Match'
+    const videoMatch = binarySearch(videos, 0, videos.length - 1, matchEndTime, timezone, matchType, match.opponents.teams)
     if (videoMatch) {
       return videoMatch
     }
@@ -131,9 +141,8 @@ module.exports.function = function GetMatchVideoUrl (match) {
   console.log ('Getting twitch url for ', match)
   const status = String(match.status) // enum convert to string
   
-  if (status === 'Past' && match.seriesName !== 'All-stars') {
+  if (status === 'Past') {
     // if past match, have to search through all videos on OverwatchLeague channel
-    // TODO: support all stars
     const videoMatch = searchForPastVideo(match)
     return videoMatch.url ?  videoMatch.url : undefined
   } else {
