@@ -2,10 +2,16 @@ capsule-info {
   description ("Get the schedule for Overwatch League. Gives scores and links to videos of past matches.")
   dispatch-name (Overwatch League Fan)
   display-name (Overwatch League Fan)
-  icon-asset (/images/capsule-icon.svg)
-  developer-name (pngpog)
+  icon-asset (/images/reinhardt-capsule-icon.svg)
+  developer-name (Pog)
+  dispatch-aliases {
+    alias (Overwatch League)
+    alias (Overwatch esports)
+    alias (Overwatch competition)
+    alias (Overwatch League schedule)
+  }
   search-keywords {
-    keyword (overwatch)
+    keyword (video game)
     keyword (esports)
     keyword (video gaming competition)
     keyword (competitive video gaming)
