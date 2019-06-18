@@ -1,81 +1,127 @@
 let dates = require('dates')
-let http = require('http')
 let console = require('console')
 let config = require('config')
-let secret = require ('secret')
 
 const { getTwitchVideoAPIData } = require('./getTwitchVideo/client')
 
-const binarySearch = (videos, startIndex, endIndex, matchStartTime, timezone) => {
+const parseTwitchTime = (twitchTime, timezone) => {
+  if (twitchTime) {
+    return new dates.ZonedDateTime.parseDateTime(twitchTime).withZoneSameInstant(timezone)
+  }
+}
+
+const binarySearch = (videos, startIndex, endIndex, matchEndTime, timezone, teams) => {
+  // binary search a 100 videos (sorted from most to least recent)
+  // returns the video that is a 'Full Match' for teams provided on the correct date
   if (endIndex >= startIndex) {
+    // there are still videos to search, get mid index
     const midIndex = Math.floor(startIndex + (endIndex - startIndex) / 2)
-    const midVideoTime = new dates.ZonedDateTime.parseDateTime(videos[midIndex].created_at).withZoneSameInstant(timezone)
-    if (matchStartTime.isAfterOrEqualTo(midVideoTime.atStartOfDay()) && matchStartTime.isBeforeOrEqualTo(midVideoTime.atEndOfDay())) {
+    const midVideoDateStart = parseTwitchTime(videos[midIndex].created_at, timezone).atStartOfDay()
+    const midVideoDateEnd = parseTwitchTime(videos[midIndex].created_at, timezone).atEndOfDay()
+
+    if (matchEndTime.isAfterOrEqualTo(midVideoDateStart) && matchEndTime.isBeforeOrEqualTo(midVideoDateEnd)) {
       // match happened during day of mid video -> use mid index to get all surrounding videos with that date
-      let videoMatches = [videos[midIndex]]
-      let leftMost = midIndex - 1
-      let rightMost = midIndex + 1
-      while (leftMost >= 0) {
-        let leftMostTime = new dates.ZonedDateTime.parseDateTime(videos[leftMost].created_at).withZoneSameInstant(timezone)
-        // keep going left of mid index (to earlier dates) to grab all videos that share same date as matchStartTime
-        if (matchStartTime.isAfterOrEqualTo(leftMostTime.atStartOfDay()) && matchStartTime.isBeforeOrEqualTo(leftMostTime.atEndOfDay())) {
-          videoMatches.push(videos[leftMost])
-          leftMost --
+
+      let midVideo = videos[midIndex]
+      if (midVideo.title.indexOf('Full Match') >  -1 && midVideo.title.indexOf(teams[0].name) > -1 && midVideo.title.indexOf(teams[0].name) > -1) {
+        return midVideo
+      }
+      
+      let leftIndex = midIndex - 1
+      while (leftIndex >= 0) {
+        let leftVid = videos[leftIndex]
+        let leftVidDateStart = parseTwitchTime(leftVid.created_at, timezone).atStartOfDay()
+        let leftVidDateEnd = parseTwitchTime(leftVid.created_at, timezone).atEndOfDay()
+        
+        if (leftVid.title.indexOf('Full Match') === -1) {
+          // quickly move on to next vid on the left if title doesn't include full match
+          leftIndex --
+          continue
+        }
+        
+        if (matchEndTime.isAfterOrEqualTo(leftVidDateStart) && matchEndTime.isBeforeOrEqualTo(leftVidDateEnd)) {
+          // correct video creation date -> match ended on same date
+          if (leftVid.title.indexOf(teams[0].name) > -1 && leftVid.title.indexOf(teams[0].name) > -1) {
+            // correct title (has both teams) -> all criteria met, return vid!
+            return leftVid
+          } else {
+            // still correct video date, so keep searching left
+            leftIndex --
+          }
         } else {
+          // no longer in the correct date, break out of while loop
           break
         }
       }
-      while (rightMost < videos.length) {
-        let rightMostTime = new dates.ZonedDateTime.parseDateTime(videos[rightMost].created_at).withZoneSameInstant(timezone)
-        // keep going right of mid index (to laster dates) to grab all videos that share same date as matchStartTime
-        if (matchStartTime.isAfterOrEqualTo(rightMostTime.atStartOfDay()) && matchStartTime.isBeforeOrEqualTo(rightMostTime.atEndOfDay())) {
-          videoMatches.push(videos[rightMost])
-          rightMost ++
+
+      let rightIndex = midIndex + 1
+      while (rightIndex >= 0) {
+        let rightVid = videos[rightIndex]
+        let rightVidDateStart = parseTwitchTime(rightVid.created_at, timezone).atStartOfDay()
+        let rightVidDateEnd = parseTwitchTime(rightVid.created_at, timezone).atEndOfDay()
+
+        if (rightVid.title.indexOf('Full Match') === -1) {
+          // quickly move on to next vid on the right if title doesn't include full match
+          rightIndex ++
+          continue
+        }
+
+        if (matchEndTime.isAfterOrEqualTo(rightVidDateStart) && matchEndTime.isBeforeOrEqualTo(rightVidDateEnd)) {
+          // correct video creation date -> match ended on same date
+          if (rightVid.title.indexOf(teams[0].name) > -1 && rightVid.title.indexOf(teams[0].name) > -1) {
+            // correct title (has both teams) -> all criteria met, return vid!
+            return rightVid
+          } else {
+            // still correct video date, so keep searching right
+            rightIndex ++
+          }
         } else {
+          // no longer in the correct date, break out of while loop
           break
         }
       }
-      return videoMatches
-    } else if (matchStartTime.isAfter(midVideoTime.atStartOfDay())) {
+    } else if (matchEndTime.isAfter(midVideoDateStart)) {
       // match happened after day of mid video -> get start to mid (left half of array) for later videos
-      return binarySearch(videos, startIndex, midIndex - 1, matchStartTime, timezone)
-    } else
+      return binarySearch(videos, startIndex, midIndex - 1, matchEndTime, timezone, teams)
+    } else {
       // match happened start day of mid video -> get mid to end (right half) for earlier videos
-      return binarySearch(videos, midIndex - 1, endIndex, matchStartTime, timezone)
-  } else {
-    // none of the videos have the same date as match
-    return
+      return binarySearch(videos, midIndex - 1, endIndex, matchEndTime, timezone, teams)
+    }
   }
 }
 
 
 const searchForPastVideo = (match, cursor) => {
   const apiResponse = getTwitchVideoAPIData(cursor)
+
   if (apiResponse.error || !apiResponse.data || apiResponse.data.length === 0) {
-    // means there are no more vidoes to get, so return empty (couldn't find any vids)
+    // api returned no more videos, so return empty (couldn't find any vids)
     return
   }
-  
+
+  // get match start and end time to compare against video creation time
+  // videos are usually created right after a match ends
   const matchStartTime =  new dates.ZonedDateTime.fromDateTime(match.time.start)
+  const matchEndTime = match.time.end ? new dates.ZonedDateTime.fromDateTime(match.time.end) : matchStartTime
   const timezone = String(match.time.start.time.timezone)
-  
+
+  // process API response:  videos to search, update cursor if available
   const videos = apiResponse.data ? apiResponse.data : apiResponse.data
-  // update cursor
   cursor = apiResponse.pagination && apiResponse.pagination.cursor ? apiResponse.pagination.cursor : undefined
-  const firstVidTime = new dates.ZonedDateTime.parseDateTime(videos[0].created_at).withZoneSameInstant(timezone) // first vid is most recent
+
+  // get creation times of first (most recent) and last (least recent) videos of response
+  const firstVidTime = new dates.ZonedDateTime.parseDateTime(videos[0].created_at).withZoneSameInstant(timezone)
   const lastVidTime = new dates.ZonedDateTime.parseDateTime(videos[videos.length - 1].created_at).withZoneSameInstant(timezone)
-  // fast fail. get first 100 videos for overwatch league. if the date of match isn't between video 1 date and video 100 date, move to next 100
-  if (matchStartTime.isBeforeOrEqualTo(firstVidTime.atEndOfDay()) && matchStartTime.isAfterOrEqualTo(lastVidTime.atStartOfDay())) {
-    // if matchStartTime is between start of first vid date and end of last vid date, the video match should be inside this 100 videos array
-    const videosOnMatchDate = binarySearch(videos, 0, videos.length - 1, matchStartTime, timezone)
-    if (videosOnMatchDate.length > 0) {
-      const videoMatch = videosOnMatchDate.find((video) => {
-        let title = video.title
-        return title.indexOf('Full Match') > -1 && title.indexOf(match.opponents.teams[0].name) > -1 && title.indexOf(match.opponents.teams[0].name)
-      })
+
+  // we only search within the 100 videos if the match ended/ video could have been created between the times of first and last vid
+  if (matchEndTime.isAfterOrEqualTo(lastVidTime.atStartOfDay()) && matchEndTime.isBeforeOrEqualTo(firstVidTime.atEndOfDay())) {
+    // binary search videos as they are sorted by time to get all 'Full Match' videos on the match date
+    const videoMatch = binarySearch(videos, 0, videos.length - 1, matchEndTime, timezone, match.opponents.teams)
+    if (videoMatch) {
       return videoMatch
     }
-  } else {
+  } else if (cursor) {
+    // get next 100 vids if there is a cursor
     return searchForPastVideo(match, cursor)
   }
 }
