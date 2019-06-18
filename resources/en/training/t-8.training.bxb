@@ -1,5 +1,5 @@
-train (t-u7jsaip3qc5hl1bbg3bhjek3r) {
-  utterance ("[g:Schedule#all] What games are playing (this weekend)[v:time.DateTimeExpression]")
+train (t-8xwm0f31s0zer2dh86fykf9wj) {
+  utterance ("[g:Schedule#all] Find matches for (last month)[v:time.DateTimeExpression]")
   plan (lcrNCsIwEATgsf49hKAgeM3FJ/CvXrxZvIe4tIGYlGTb6sVnN/UgIuTgwsIM82GKee1K4VrynWRVnUiWDeXSioumbmMMFon9rCq6NoawTIAj8cesEqbQNypcrg2T3z4gEmznbGDfKP7x6//8s6vIYtbqVnAcxF4y9eJwrz2FoJ3FBANkGGKEccz4alnMeH9/fYv7Cw==)
-  last-modified (1560835639811)
+  last-modified (1560835732183)
 }

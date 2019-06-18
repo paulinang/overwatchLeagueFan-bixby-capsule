@@ -1,0 +1,8 @@
+hints {
+  uncategorized {
+    utterance (show me upcoming matches)
+    utterance (get me this week's schedule)
+    utterance (what games are playing this weekend)
+    utterance (find matches for last month)
+  }
+}

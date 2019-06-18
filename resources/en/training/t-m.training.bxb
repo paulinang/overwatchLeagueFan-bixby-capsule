@@ -3,3 +3,8 @@ train (t-mju48m3nc25x3im2qua9a64af) {
   plan (lcrNCsIwEATgsf49hKAgeM3FJ/CvXrxZvIe4tIGYlGTb6sVnN/UgIuTgwsIM82GKee1K4VrynWRVnUiWDeXSioumbmMMFon9rCq6NoawTIAj8cesEqbQNypcrg2T3z4gEmznbGDfKP7x6//8s6vIYtbqVnAcxF4y9eJwrz2FoJ3FBANkGGKEccz4alnMeH9/fYv7Cw==)
   last-modified (1560528484142)
 }
+train (t-msx105f4e3mxrk5y3qmasqoiq) {
+  utterance ("[g:Schedule#all] Get me (this week)[v:time.DateTimeExpression]'s schedule")
+  plan (lcrNCsIwEATgsf49hKAgeM3FJ/CvXrxZvIe4tIGYlGTb6sVnN/UgIuTgwsIM82GKee1K4VrynWRVnUiWDeXSioumbmMMFon9rCq6NoawTIAj8cesEqbQNypcrg2T3z4gEmznbGDfKP7x6//8s6vIYtbqVnAcxF4y9eJwrz2FoJ3FBANkGGKEccz4alnMeH9/fYv7Cw==)
+  last-modified (1560835584499)
+}

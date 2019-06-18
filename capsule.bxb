@@ -1,6 +1,6 @@
 capsule {
   id (pog.overwatchLeagueFan)
-  version (0.1.0)
+  version (1.0.0)
   format (3)
   targets {
     target (bixby-mobile-en-US)
@@ -14,5 +14,8 @@ capsule {
     import (viv.entity) { as (entity) version (3.18.18) }
     import (viv.time) { as (time) version-from (entity) }
     import (viv.punchoutToApp) { as (punchout) version(1.0.8) }
+  }
+  store-sections {
+    section (GamesAndFun)
   }
 }

@@ -1,8 +1,13 @@
 capsule-info {
+  description ("Get the schedule for Overwatch League. Gives scores and links to videos of past matches.")
+  dispatch-name (Overwatch League Fan)
   display-name (Overwatch League Fan)
-  developer-name (Overwatch League Fan)
   icon-asset (/images/capsule-icon.svg)
-  description ("__DESCRIPTION__")
-  website-url (https://example.com/)
-  terms-url (https://example.com/terms-of-use/)
+  developer-name (pngpog)
+  search-keywords {
+    keyword (overwatch)
+    keyword (esports)
+    keyword (video gaming competition)
+    keyword (competitive video gaming)
+  }
 }
