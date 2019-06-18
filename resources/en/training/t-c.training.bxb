@@ -1,0 +1,5 @@
+train (t-ce5ixs39l74ysu2pyvbm9enry) {
+  utterance ("[g:Schedule#all] Get me the matches in (August)[v:time.DateTimeExpression]")
+  plan (lcrNCsIwEATgsf49hKAgeM3FJ/CvXrxZvIe4tIGYlGTb6sVnN/UgIuTgwsIM82GKee1K4VrynWRVnUiWDeXSioumbmMMFon9rCq6NoawTIAj8cesEqbQNypcrg2T3z4gEmznbGDfKP7x6//8s6vIYtbqVnAcxF4y9eJwrz2FoJ3FBANkGGKEccz4alnMeH9/fYv7Cw==)
+  last-modified (1560836519281)
+}

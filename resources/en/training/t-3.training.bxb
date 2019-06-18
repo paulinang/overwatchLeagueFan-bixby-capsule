@@ -1,0 +1,15 @@
+train (t-3650c5aunnbdwgmyanajcp0tv) {
+  utterance ([g:Schedule#all] What game is up next)
+  plan (Y2BikCvIT9fLL0stKk8sSc7wSU1ML011S8zTC8tMLXfMyWGQxyEfnJyRmlKak8rACIQMDExADGYBAA==)
+  last-modified (1560836767646)
+}
+train (t-3on0rkab3rucys0n15903c0aj) {
+  utterance ("[g:Schedule#all] What is the schedule going to be (this month)[v:time.DateTimeExpression]")
+  plan (lcrNCsIwEATgsf49hKAgeM3FJ/CvXrxZvIe4tIGYlGTb6sVnN/UgIuTgwsIM82GKee1K4VrynWRVnUiWDeXSioumbmMMFon9rCq6NoawTIAj8cesEqbQNypcrg2T3z4gEmznbGDfKP7x6//8s6vIYtbqVnAcxF4y9eJwrz2FoJ3FBANkGGKEccz4alnMeH9/fYv7Cw==)
+  last-modified (1560836888130)
+}
+train (t-3qolxsq3lydzlerjvib5663ph) {
+  utterance ("[g:Schedule#all] What games are on (next week)[v:time.DateTimeExpression]")
+  plan (lcrNCsIwEATgsf49hKAgeM3FJ/CvXrxZvIe4tIGYlGTb6sVnN/UgIuTgwsIM82GKee1K4VrynWRVnUiWDeXSioumbmMMFon9rCq6NoawTIAj8cesEqbQNypcrg2T3z4gEmznbGDfKP7x6//8s6vIYtbqVnAcxF4y9eJwrz2FoJ3FBANkGGKEccz4alnMeH9/fYv7Cw==)
+  last-modified (1560836350414)
+}

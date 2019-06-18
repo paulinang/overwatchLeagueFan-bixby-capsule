@@ -1,0 +1,10 @@
+train (t-noaa2hmr2vo359qf6zyte3e98) {
+  utterance ([g:Schedule#all] Any matches coming up?)
+  plan (Y2BikCvIT9fLL0stKk8sSc7wSU1ML011S8zTC8tMLXfMyWGQxyEfnJyRmlKak8rACIQMDExADGYBAA==)
+  last-modified (1560836412492)
+}
+train (t-nyie5hdfqau6969bytvawdgcg) {
+  utterance ("[g:Schedule#all] What's the next match")
+  plan (Y2BikCvIT9fLL0stKk8sSc7wSU1ML011S8zTC8tMLXfMyWGQxyEfnJyRmlKak8rACIQMDExADGYBAA==)
+  last-modified (1560836755801)
+}
