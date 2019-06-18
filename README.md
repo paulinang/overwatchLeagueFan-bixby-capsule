@@ -21,17 +21,24 @@ Clicking on an item provides some extra information
 
 ### Inputs
 There are currently 2 ways a user can request match information
+
 **1. No Inputs**
->What's the schedule
-Any matches coming up
-What games are playing
+```
+Example NL:
+> What's the schedule
+> Any matches coming up
+> What games are playing
+```
 
 The most general use case, a match list is provided if there is a series (AKA season) and tournament (AKA stage) in progress with in progress and/or upcoming matches.
 
 **2. Specified Time Input**
+```
+Example NL:
 > Show me last week's schedule
-Any games tomorrow
-What games are playing this weekend
+> Any games tomorrow
+> What games are playing this weekend
+```
 
 This will give all matches in the specified time. If the user asked for a dateTime (ex. today at 2pm), an error will be thrown to expand the match time filter to the whole day (ex. today).
 
