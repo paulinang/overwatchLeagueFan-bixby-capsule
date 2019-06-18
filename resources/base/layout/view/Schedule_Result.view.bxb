@@ -16,18 +16,19 @@ result-view {
         // Match_Result.view.bxb specifies what to render for a match detail
         has-details (true)
         
-        // pagination
-        navigation-mode {
-          read-many-and-next {
-            page-size (4)
-            list-summary ("#{macro('match-list-summary', schedule.matches)}")
-            page-content {
-              underflow-statement ("#{macro('match-nav-first-page')}") // TODO: this doesn't show, I added it to match-list-summary
-              next-page-question ("#{macro('match-nav-next-page')}")
-              overflow-statement ("#{macro('match-nav-last-page')}")
-            }
-          }
-        }
+//         pagination -- DISABLED until beta features are out
+//         navigation-mode {
+//           read-many-and-next {
+//             page-size (4)
+//             list-summary ("#{macro('match-list-summary', schedule.matches)}")
+//             page-content {
+//               
+//               underflow-statement ("#{macro('match-nav-first-page')}") // TODO: this doesn't show, I added it to match-list-summary
+//               next-page-question ("#{macro('match-nav-next-page')}")
+//               overflow-statement ("#{macro('match-nav-last-page')}")
+//             }
+//           }
+//         }
       }
     } else-if (size(schedule.matches) == 1) {
       layout-macro (match-result-details) {
@@ -37,7 +38,9 @@ result-view {
     }
   }
   
-  conversation-drivers {
-    conversation-driver (Next)
-  }
+  // conversation-drivers {
+  //   if (size(schedule.matches) > 4) {
+  //     conversation-driver (Next)
+  //   }
+  // }
 }
