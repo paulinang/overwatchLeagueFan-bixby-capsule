@@ -3,7 +3,7 @@ Bixby capsule that provides information about the eSports event [Overwatch Leagu
 
 2 APIS used:
 1. [PandaScore](https;//pandascore.co/) for match schedule and scores
-2. [Twitch.tv API]((https://dev.twitch.tv/)) for recorded videos of past matches
+2. [Twitch.tv API](https://dev.twitch.tv/) for recorded videos of past matches
 ---
 ---
 ## Version  1.0.0
