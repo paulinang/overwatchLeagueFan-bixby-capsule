@@ -2,9 +2,9 @@ let console = require('console')
 let config = require('config')
 let fail = require('fail')
 
-const { getMatches } = require('./getMatches/main')
-const { getSeries } = require('./getSeries/main')
-const { getTournaments } = require('./getTournaments/main')
+const { getMatches } = require('./pandaScore/getMatches/main')
+const { getSeries } = require('./pandaScore/getSeries/main')
+const { getTournaments } = require('./pandaScore/getTournaments/main')
 
 module.exports.function = function getSchedule ($vivContext, time) {
   console.log('Getting Overwatch League schedule')

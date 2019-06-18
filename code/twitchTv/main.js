@@ -83,7 +83,7 @@ const binarySearch = (videos, startIndex, endIndex, matchEndTime, timezone, matc
   }
 }
 
-const searchForPastTwitchVideo = (match, cursor) => {
+const getPastTwitchVideo = (match, cursor) => {
   const apiResponse = getTwitchVideoAPIData(cursor)
   
   if (apiResponse.error || !apiResponse.data || apiResponse.data.length === 0) {
@@ -116,10 +116,10 @@ const searchForPastTwitchVideo = (match, cursor) => {
     }
   } else if (cursor) {
     // get next 100 vids if there is a cursor
-    return searchForPastTwitchVideo(match, cursor)
+    return getPastTwitchVideo(match, cursor)
   }
 }
 
 module.exports = {
-  searchForPastTwitchVideo: searchForPastTwitchVideo
+  getPastTwitchVideo: getPastTwitchVideo
 }

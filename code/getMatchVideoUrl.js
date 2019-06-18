@@ -1,7 +1,7 @@
 let console = require('console')
 let config = require('config')
 
-const { searchForPastTwitchVideo } = require('./searchForPastTwitchVideo/main')
+const { getPastTwitchVideo } = require('./twitchTv/main')
 
 module.exports.function = function GetMatchVideoUrl (match) {
   console.log ('Getting twitch url for ', match)
@@ -9,7 +9,7 @@ module.exports.function = function GetMatchVideoUrl (match) {
   
   if (status === 'Past') {
     // if past match, have to search through all videos on OverwatchLeague channel
-    const videoMatch = searchForPastTwitchVideo(match)
+    const videoMatch = getPastTwitchVideo(match)
     if (videoMatch && videoMatch.url) {
       return videoMatch.url
     }
