@@ -2,6 +2,7 @@ let dates = require('dates')
 
 const parseAPItime = (timeString, timezone) => {
   // example API string: 2019-05-01T23:50:00Z
+  // returns a viv.time.DateTime
   if (timeString) {
     return new dates.ZonedDateTime.parseDateTime(timeString).withZoneSameInstant(timezone).getDateTime()
   }
