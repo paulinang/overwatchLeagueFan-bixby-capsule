@@ -1,3 +1,8 @@
+train (t-04hz7eh77x6usvl2p3sx8yu20) {
+  utterance ("[g:Schedule#all] Any matches in the (first week of December)[v:time.DateTimeExpression]")
+  plan (lcrNCsIwEATgsf49hKAgeM3FJ/CvXrxZvIe4tIGYlGTb6sVnN/UgIuTgwsIM82GKee1K4VrynWRVnUiWDeXSioumbmMMFon9rCq6NoawTIAj8cesEqbQNypcrg2T3z4gEmznbGDfKP7x6//8s6vIYtbqVnAcxF4y9eJwrz2FoJ3FBANkGGKEccz4alnMeH9/fYv7Cw==)
+  last-modified (1560880767511)
+}
 train (t-0agow8zehx9u0dy1ctnn21g01) {
   utterance ("[g:Schedule#all] Any matches (this Friday)[v:time.DateTimeExpression]?")
   plan (lcrNCsIwEATgsf49hKAgeM3FJ/CvXrxZvIe4tIGYlGTb6sVnN/UgIuTgwsIM82GKee1K4VrynWRVnUiWDeXSioumbmMMFon9rCq6NoawTIAj8cesEqbQNypcrg2T3z4gEmznbGDfKP7x6//8s6vIYtbqVnAcxF4y9eJwrz2FoJ3FBANkGGKEccz4alnMeH9/fYv7Cw==)
