@@ -48,7 +48,7 @@ const binarySearch = (videos, startIndex, endIndex, matchEndTime, timezone, matc
       }
 
       let rightIndex = midIndex + 1
-      while (rightIndex >= 0) {
+      while (rightIndex < videos.length) {
         let rightVid = videos[rightIndex]
         let rightVidDateStart = parseTwitchTime(rightVid.created_at, timezone).atStartOfDay()
         let rightVidDateEnd = parseTwitchTime(rightVid.created_at, timezone).atEndOfDay()
@@ -114,7 +114,9 @@ const getPastTwitchVideo = (match, cursor) => {
     if (videoMatch) {
       return videoMatch
     }
-  } else if (cursor) {
+  }
+  
+  if (cursor) {
     // get next 100 vids if there is a cursor
     return getPastTwitchVideo(match, cursor)
   }
