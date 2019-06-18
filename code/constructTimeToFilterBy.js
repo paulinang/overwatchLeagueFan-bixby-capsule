@@ -1,5 +1,4 @@
 let dates = require('dates')
-let console = require('console')
 let fail = require('fail')
 
 module.exports.function = function constructTimeToFilterBy (duration, date, dateTime, dateInterval, dateTimeInterval) {

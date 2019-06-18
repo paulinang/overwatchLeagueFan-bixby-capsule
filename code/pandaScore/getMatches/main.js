@@ -7,7 +7,6 @@ const { parseAPITime } = require('../lib/dateTime')
 
 const getMatches = (timezone, time, status, tournament) => {
   console.log('Getting matches')
-  console.log(timezone, time, status, tournament)
   
   const apiResponse = getMatchAPIData(time, status, tournament)
   
