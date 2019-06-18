@@ -1,28 +1,46 @@
-# Overwatch League Fan Bixby Capsule
+# Overwatch League Fan
+Bixby capsule that provides information about the eSports event [Overwatch League](https://overwatchleague.com/)
 
-The first implementation is focused on getting fans watching Overwatch League as quickly and smoothly as possible. Quick glance of the schedule is more important than in depth stats (API does not provide these for free)
+2 APIS used:
+1. [PandaScore](https;//pandascore.co/) for match schedule and scores
+2. [Twitch.tv API]((https://dev.twitch.tv/)) for recorded videos of past matches
+---
+---
+## Version  1.0.0
+---
+The first implementation is focused on getting fans watching Overwatch League matches as quickly and smoothly as possible, either by giving the time of the next match or punchout to videos of past matches.
 
-Queries try to return a match list. Each item has the scheduled time, teams, and score (if past or in progress). 
-Clicking on a match item will give a link to the Overwatch League channel on twitch.tv. Past matches will give links to the recorded vid of that match.
+All initial queries return a list of match items. Each match item gives:
+- Start time (scheduled for future, start for past)
+- Teams playing (2 teams - logo + name)
+- Score (if past or in progress match)
 
-Users can give inputs (ZeroOrOneOf):
-NONE
-- First check: series in progress -> No, gives  'OffSeason' halt error. Yes, move to second check.
-- Second check: tournament in progress -> Gives current + upcoming matches of that tournament. else, gives 0 matches (but says series + tournament in progress)
-Example NL: "What's the schedule" "Show me the league schedule"
+Clicking on an item provides some extra information
+- Punchout to the Overwatch League channel on twitch.tv (specific video for past match if available)
+- Punchout to the official Overwatch League website
 
-1. Time -> gives paginated list of all matches in that time. Datetime will be expanded to whole date.
-Example NL: "Matches last year" "Next week schedule" "What's today's schedule" "Any matches tomorrow"
+### Inputs
+There are currently 2 ways a user can request match information
+**1. No Inputs**
+>What's the schedule
+Any matches coming up
+What games are playing
 
-TODO:
-1. Deal with off season use case -- not urgent as Overwatch League Season 2 is currently in progress
-2. Deal with edge cases:
-- series in progress, but no tournament in progress -> give next tournament matches
-- series in progress, but no tournament in progress or upcoming tournament -> give last tournament matches
-- series in progress, but no tournaments (past, in progress, upcoming) -> give dialog saying couldn't find any scheduled matches
-3. Support search matches by team (max 2)
-- one team will give all upcoming matches for that team
-- two teams will give all upcoming matches where those teams face each other
-4. Improve video search
-- takes a while to search for older videos
-- matches that end past midnight of the day they start might cause an error since search is for videos published same date as when the video starts.\
+The most general use case, a match list is provided if there is a series (AKA season) and tournament (AKA stage) in progress with in progress and/or upcoming matches.
+
+**2. Specified Time Input**
+> Show me last week's schedule
+Any games tomorrow
+What games are playing this weekend
+
+This will give all matches in the specified time. If the user asked for a dateTime (ex. today at 2pm), an error will be thrown to expand the match time filter to the whole day (ex. today).
+
+---
+---
+## Next Steps
+---
+1. Handle off-season response (Season 2 2019 ends August 25) with last season's results + next season's start date (instead of current halt error)
+2. Handle edge cases for series in progress, but no in progress tournament or in progress + upcoming matches founds (currently just gives 0 matches, try to give past results + next tournament/ season if possible)
+3. Support search matches by team (max 2 / match)
+4. Improve runtime -> possibly move to remote endpoint and microservice for async calls
+5. Add more information --> match details + stats (might need to upgrade from free pandascore API)
