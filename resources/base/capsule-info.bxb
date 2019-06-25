@@ -2,7 +2,7 @@ capsule-info {
   description ("Get the schedule for Overwatch League. Shows when matches are scheduled and what teams are playing, with scores and links to videos for past matches. Search by time for a match in the past or future.")
   dispatch-name (Overwatch League Fan)
   display-name (Overwatch League Fan)
-  icon-asset (/images/reinhardt-capsule-icon.svg)
+  icon-asset (/images/reinhardt-capsule-icon.png)
   developer-name (Turtle Gamer)
   dispatch-aliases {
     alias (Overwatch League)
