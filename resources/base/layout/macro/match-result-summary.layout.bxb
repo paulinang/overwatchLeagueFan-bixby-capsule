@@ -12,13 +12,19 @@ layout-macro-def(match-result-summary) {
         
         divider
         
-        if (exists(match.opponents.teams)) {
-          layout-macro (match-team-hbox-1) {
-            param (team) { expression (match.opponents.teams) }
-            param (matchStatus) { expression (match.status) }
+        layout-macro (match-team-hbox-1) {
+          param (team) { 
+            if (exists(match.opponents.teams)) {
+              expression (match.opponents.teams)
+            }
           }
-          layout-macro (match-team-hbox-2) {
-            param (team) { expression (match.opponents.teams) }
+          param (matchStatus) { expression (match.status) }
+        }
+        layout-macro (match-team-hbox-2) {
+          param (team) { 
+            if (exists(match.opponents.teams)) {
+              expression (match.opponents.teams)
+            }
           }
         }
       }

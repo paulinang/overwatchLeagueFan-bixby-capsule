@@ -3,14 +3,11 @@ capsule-info {
   dispatch-name (Overwatch League Fan)
   display-name (Overwatch League Fan)
   icon-asset (/images/reinhardt-capsule-icon.png)
-  developer-name (Turtle Gamer)
-  dispatch-aliases {
-    alias (Overwatch League)
-    alias (Overwatch esports)
-    alias (Overwatch competition)
-    alias (Overwatch League schedule)
-  }
+  developer-name (Turtle)
   search-keywords {
+    keyword (Overwatch)
+    keyword (Overwatch league)
+    keyword (competitive Overwatch)
     keyword (video game)
     keyword (esports)
     keyword (video gaming competition)

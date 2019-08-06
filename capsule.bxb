@@ -1,6 +1,6 @@
 capsule {
   id (pog.overwatchLeagueFan)
-  version (1.0.2)
+  version (1.0.3)
   format (3)
   targets {
     target (bixby-mobile-en-US)
@@ -9,6 +9,8 @@ capsule {
     concepts-inherit-super-type-features
     modern-prompt-rejection
     support-halt-effect-in-computed-inputs
+    modern-default-view-behavior
+    no-filtering-with-validation
   }
   capsule-imports {
     import (viv.entity) { as (entity) version (3.18.18) }
