@@ -54,7 +54,7 @@ template-macro-def (dateInterval) {
       if (exists(dateInterval.parseTree.explicitOffsetFromNow)) {
         template ("#{value(dateInterval.parseTree.explicitOffsetFromNow)} #{value(dateInterval.parseTree.monthName)}")
       }
-      template ("in #{value(dateInterval.parseTree.monthName)}")
+      template ("for #{value(dateInterval.parseTree.monthName)}[ #{value(dateInterval.start.year)}]")
     }
     if (exists(dateInterval.start) && exists(dateInterval.end)) {
       if (exists(dateInterval.start.parseTree.explicitOffsetFromNow)) {
