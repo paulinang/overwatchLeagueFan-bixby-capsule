@@ -3,4 +3,5 @@ enum (MatchType) {
   symbol (BestOf)
   symbol (Custom)
   symbol (OverwatchBestOf)
+  symbol (FirstTo)
 }
