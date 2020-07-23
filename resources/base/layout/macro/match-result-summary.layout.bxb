@@ -4,7 +4,10 @@ layout-macro-def(match-result-summary) {
   }
   content {
     compound-card {
-      
+      on-click {
+        view-for (match)
+      }
+
       content {
         layout-macro (match-title-area) {
           param (match) { expression (match) }
@@ -20,6 +23,7 @@ layout-macro-def(match-result-summary) {
           }
           param (matchStatus) { expression (match.status) }
         }
+        
         layout-macro (match-team-hbox-2) {
           param (team) { 
             if (exists(match.opponents.teams)) {

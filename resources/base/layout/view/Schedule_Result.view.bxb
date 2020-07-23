@@ -13,8 +13,6 @@ result-view {
             param (match) { expression (match) }
           }
         }
-        // Match_Result.view.bxb specifies what to render for a match detail
-        has-details (true)
         
 //         pagination -- DISABLED until beta features are out
 //         navigation-mode {

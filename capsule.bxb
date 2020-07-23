@@ -5,17 +5,11 @@ capsule {
   targets {
     target (bixby-mobile-en-US)
   }
-  runtime-flags {
-    concepts-inherit-super-type-features
-    modern-prompt-rejection
-    support-halt-effect-in-computed-inputs
-    modern-default-view-behavior
-    no-filtering-with-validation
-  }
+  store-countries { all }
+  runtime-version (7)
   capsule-imports {
-    import (viv.entity) { as (entity) version (3.18.18) }
-    import (viv.time) { as (time) version-from (entity) }
-    import (viv.punchoutToApp) { as (punchout) version(1.0.8) }
+    import (viv.time) { as (time) version (3.1.195) }
+    import (viv.punchoutToApp) { as (punchout) version(1.0.19) }
   }
   store-sections {
     section (GamesAndFun)

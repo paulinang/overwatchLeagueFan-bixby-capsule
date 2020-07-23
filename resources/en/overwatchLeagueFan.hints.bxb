@@ -1,8 +1,16 @@
 hints {
   uncategorized {
-    utterance (show me the schedule)
-    utterance (get me this week's matches)
-    utterance (what games are playing this weekend)
-    utterance (find matches for last month)
+    hint ("Ask Overwatch League Fan to show me the schedule") {
+      preferred-hint ("Show me the schedule")
+    }
+    hint ("With Overwatch League Fan, get me this week's matches") {
+      preferred-hint ("Get me this week's matches")
+    }
+    hint ("Ask Overwatch League Fan what games are playing this weekend") {
+      preferred-hint ("What games are playing this weekend")
+    }
+    hint ("In Overwatch League Fan, find matches for last month") {
+      preferred-hint ("Find matches for last month")
+    }
   }
 }
