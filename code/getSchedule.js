@@ -2,9 +2,7 @@ let console = require('console')
 let config = require('config')
 let fail = require('fail')
 
-const { getMatches } = require('./pandaScore/getMatches/main')
-const { getSeries } = require('./pandaScore/getSeries/main')
-const { getTournaments } = require('./pandaScore/getTournaments/main')
+const pandaScore = require('./pandaScore/main')
 
 module.exports.function = function getSchedule ($vivContext, time) {
   console.log('Getting Overwatch League schedule')
@@ -14,7 +12,7 @@ module.exports.function = function getSchedule ($vivContext, time) {
   if (!time) {
     // ex. "Get me the schedule" "What's the league schedule"
     // user didn't specify inputs, get 'running' (in progress) series
-    let currentSeries = getSeries(timezone, undefined, 'running') 
+    let currentSeries = pandaScore.getSeries(timezone, undefined, 'running') 
     
     if (!currentSeries || currentSeries.length == 0) {
       // no running series -- throw off season error
@@ -25,18 +23,18 @@ module.exports.function = function getSchedule ($vivContext, time) {
       )
     } else {
       // if there is a 'running' series, get 'running' tournament
-      let currentTournament = getTournaments(timezone, undefined, 'running', currentSeries[0])
+      let currentTournament = pandaScore.getTournaments(timezone, undefined, 'running', currentSeries[0])
       if (!currentTournament || currentTournament.length == 0) {
         // TODO: get last tournament results + when next tournament begins
       } else {
         // current tournament -> get current + upcoming matches
-        let currentMatch = getMatches(timezone, time, 'running', currentTournament[0])
-        let upcomingMatches = getMatches(timezone, time, 'upcoming', currentTournament[0])
+        let currentMatch = pandaScore.getMatches(timezone, time, 'running', currentTournament[0])
+        let upcomingMatches = pandaScore.getMatches(timezone, time, 'upcoming', currentTournament[0])
         matches = currentMatch ? currentMatch.concat(upcomingMatches) : upcomingMatches
       }
     }
   } else {
-    matches = getMatches(timezone, time)
+    matches = pandaScore.getMatches(timezone, time)
   }
   
   return {

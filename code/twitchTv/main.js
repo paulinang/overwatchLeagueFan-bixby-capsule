@@ -1,7 +1,7 @@
 let dates = require('dates')
 
 const { getTwitchVideoAPIData } = require('./client')
-const { parseTwitchTime, checkTeamsInVideo } = require('./helpers')
+const { parseTwitchTime, checkTeamsInVideo } = require('./util')
 
 const binarySearch = (videos, startIndex, endIndex, matchEndTime, timezone, matchType, teams) => {
   // binary search a 100 videos (sorted from most to least recent)
