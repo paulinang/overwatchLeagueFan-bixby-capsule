@@ -17,8 +17,9 @@ const parseDateTime = (timeString, timezone) => {
 }
 
 const parseEventTime = (eventData, timezone) => {
+
   return {
-    start: parseDateTime(eventData.begin_at, timezone),
+    start: eventData.begin_at ? parseDateTime(eventData.begin_at, timezone) : eventData.scheduled_at ? parseDateTime(eventData.scheduled_at, timezone) : null,
     end: parseDateTime(eventData.end_at, timezone)
   }
 }
