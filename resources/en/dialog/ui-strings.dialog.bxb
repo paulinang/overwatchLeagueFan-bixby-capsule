@@ -67,3 +67,7 @@ template-macro-def (watch-on-twitch) {
 template-macro-def (visit-official-site) {
   content: template ("Go to official site")
 }
+
+template-macro-def (official-site-attribution) {
+  content: template ("More on overwatchleague.com")
+}

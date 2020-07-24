@@ -6,15 +6,38 @@
   content {
     section {
       content {
-       layout-macro (match-result-summary) {
+        layout-macro (match-title-area) {
           param (match) { expression (match) }
         }
-        layout-macro (match-video-punchout) {
-          param (match) { expression (match) }
+        
+        divider
+        
+        layout-macro (match-team-hbox-1) {
+          param (team) { 
+            if (exists(match.opponents.teams)) {
+              expression (match.opponents.teams)
+            }
+          }
+          param (matchStatus) { expression (match.status) }
         }
-        layout-macro (official-site-punchout) {
-          param (url) { expression (leagueUrl) }
+        
+        layout-macro (match-team-hbox-2) {
+          param (team) { 
+            if (exists(match.opponents.teams)) {
+              expression (match.opponents.teams)
+            }
+          }
         }
+
+        attribution-link { 
+          label { template-macro (official-site-attribution) }
+          url { template ("#{raw(leagueUrl)}") }
+        }
+
+        // disabled until update GetMatchVideoUrl to get youtube links
+        // layout-macro (match-video-punchout) {
+        //   param (match) { expression (match) }
+        // }
       }
     }
   }

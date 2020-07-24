@@ -46,10 +46,11 @@ structure (Match) {
   //   lazy-source (GetMatchGames)
   //   min (Optional) max (Many)
   // }
-  
-  property (videoUrl) {
-    type (MatchVideoUrl)
-    lazy-source (GetMatchVideoUrl)
-    min (Optional) max (One)
-  }
+
+  // disabled, Overwatch League has moved from twitch to youtube, need to update
+  // property (videoUrl) {
+  //   type (MatchVideoUrl)
+  //   lazy-source (GetMatchVideoUrl)
+  //   min (Optional) max (One)
+  // }
 }
