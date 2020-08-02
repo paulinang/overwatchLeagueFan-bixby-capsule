@@ -52,7 +52,6 @@ const parseTeam = (teamData) => {
   return {
     id: teamData.id,
     name: teamData.name,
-    imageUrl: teamData.image_url,
     acronym: teamData.acronym
   }
 }

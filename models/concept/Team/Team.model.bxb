@@ -9,11 +9,6 @@ structure (Team) {
     type (TeamName)
     min (Required) max (One)
   }
-  property (imageUrl) {
-   type (viv.core.Text)
-    min (Optional) max (One)
-    visibility (Private)
-  }
   property (acronym) {
     type (TeamAcronym)
     min (Optional) max (One)

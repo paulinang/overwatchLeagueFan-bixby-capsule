@@ -13,7 +13,7 @@ layout-macro-def (match-team-hbox-1) {
             content {
               single-line {
                 image {
-                  url ("[#{value(team[0].imageUrl)}]")
+                  url ("[/images/team-logo/#{value(team[0].acronym)}.png]")
                   background-color (White)
                   style (Title_XXL)
                 }
@@ -41,7 +41,7 @@ layout-macro-def (match-team-hbox-1) {
             content {
               single-line {
                 image {
-                  url ("[#{value(team[1].imageUrl)}]")
+                  url ("[/images/team-logo/#{value(team[1].acronym)}.png]")
                   background-color (White)
                   style (Title_XXL)
                 }
