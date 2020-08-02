@@ -1,6 +1,14 @@
 # Changelog
+## 1.1.0
+- Dealt with deprecation errors and warnings
+- Cut feature: Twitch punchout (OWL's video partner has changed to Youtube)
+- Cut feature: Details page for matches (PandaScore free tier doesn't give enough info)
+- Added feature: Filter by team name
+- Added assets: Team logos (instead of using PandaScore image urls)
+- Dialog adjustments
+- Updated hints for team filtering
 ## 1.0.3
-- Remove dispath aliases
+- Remove dispatch aliases
 - Add more search keywords
 - Fix deprecation warnings
 - Add year to named month to be more clear
