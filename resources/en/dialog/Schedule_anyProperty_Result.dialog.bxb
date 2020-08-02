@@ -21,12 +21,12 @@ dialog (Result) {
       // Series in progress
       if (size(schedule.tournaments) == 1 && schedule.tournaments[0].status == 'InProgress') {
         // Tournamnet in progress
-        template ("#{value(schedule.series[0].name)}, #{value(schedule.tournaments[0].name)} is in progress[, with #{size(schedule.matches)} #{concept(schedule.matches)} scheduled.]")
+        template ("#{value(schedule.series[0].name)} is in progress[, with #{size(schedule.matches)} #{concept(schedule.matches)} scheduled.]")
       } else {
         // TODO: dialog about last tournament's winners, and when next series will begin
-        template ("#{value(schedule.series[0].name)}, #{value(schedule.tournaments[0].name)} is in progress.")
+        template ("#{value(schedule.series[0].name)} is in progress.")
       }
-      template ("#{value(schedule.series[0].name)}, #{value(schedule.tournaments[0].name)} is in progress.")
+      template ("#{value(schedule.series[0].name)} is in progress.")
       
     } else {
       // Off season
