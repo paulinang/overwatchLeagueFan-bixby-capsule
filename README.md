@@ -1,53 +1,32 @@
 # Overwatch League Fan
-Bixby capsule that provides information about the eSports event [Overwatch League](https://overwatchleague.com/)
+An app for Samsung's voice assistant Bixby (a.k.a a Bixby capsule) that provides information about the eSports event [Overwatch League](https://overwatchleague.com/). It is published on the Bixby markeplace for en-US phones.
 
-2 APIS used:
-1. [PandaScore](https;//pandascore.co/) for match schedule and scores
-2. [Twitch.tv](https://dev.twitch.tv/) for recorded videos of past matches
----
----
-## Version  1.0.0
----
-The first implementation is focused on getting fans watching Overwatch League matches as quickly and smoothly as possible, either by giving the time of the next match or punchout to videos of past matches.
+## Use cases
+Inputs: Time, team name
+Output: A list of matches with time, opponents, and score if available
 
-All initial queries return a list of match items. Each match item gives:
-- Start time (scheduled for future, start for past)
-- Teams playing (2 teams - logo + name)
-- Score (if past or in progress match)
-
-Clicking on an item provides some extra information
-- Punchout to the Overwatch League channel on twitch.tv (specific video for past match if available)
-- Punchout to the official Overwatch League website
-
-### Inputs
-There are currently 2 ways a user can request match information
-
-**1. No Inputs**
+Example natural language queries:
 ```
-Example NL:
-> What's the schedule
-> Any matches coming up
-> What games are playing
+What's the schedule?
+Any matches coming up?
+Show me last week's schedule?
+Are there any matches today?
+When are the LA Gladiators playing?
+Do Philly Fusion have any matches today?
 ```
 
-The most general use case, a match list is provided if there is a series (AKA season) and tournament (AKA stage) in progress with in progress and/or upcoming matches.
+## Cut Features
+1. **Detailed info per match by clicking on a match summary**
+League data is retrieved from the [PandaScore API](https://pandascore.co/). The free tier that doesn't give enough detailed info (score breakdown, maps played, etc.) to warrant creating a separate page for match details.
+2. **Punch out to Twitch VODs and live match streams**
+This used to be implemented, but the league swapped to Youtube starting with the 2020 season. I have disabled the portion of this app that integrates the [Twitch API](https://dev.twitch.tv/), but left the [code up for reference](./code/twitchTv).
 
-**2. Specified Time Input**
-```
-Example NL:
-> Show me last week's schedule
-> Any games tomorrow
-> What games are playing this weekend
-```
+## Future Plans
+1. **Integrate Youtube API**
+This would take over the disabled Twitch portions and allow punching out to past video matches. The main challenge would be finding the correct video from API result for each match due to video naming inconsistencies (typos, unclear naming format, etc.).
+2. **Match detail breakdown with web scraping**
+Instead of upgrading to the paid PandaScore API tier, I'd like to look into scrapping the [official site](https://overwatchleague.com/) for data. I've done some intial exploration in a [separate project](https://github.com/paulinang/overwatchleague-scraper), but it needs updates for changes to league format due to COVID-19 before any more work can be done.
 
-This will give all matches in the specified time. If the user asked for a dateTime (ex. today at 2pm), an error will be thrown to expand the match time filter to the whole day (ex. today).
-
----
----
-## Next Steps
----
-1. Handle off-season response (Season 2 2019 ends August 25) with last season's results + next season's start date (instead of current halt error)
-2. Handle edge cases for series in progress, but no in progress tournament or in progress + upcoming matches founds (currently just gives 0 matches, try to give past results + next tournament/ season if possible)
-3. Support search matches by team (max 2 / match)
-4. Improve runtime -> possibly move to remote endpoint and microservice for async calls
-5. Add more information --> match details + stats (might need to upgrade from free pandascore API)
+## Resources
+[Bixby Developer Center](https://bixbydevelopers.com/) -- Build your own Bixby capsule
+[PandaScore API](https://pandascore.co/) -- eSports data provider for other video games too (LoL, CS:GO)
