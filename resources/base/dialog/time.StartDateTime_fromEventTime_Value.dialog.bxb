@@ -1,0 +1,8 @@
+dialog (Value) {
+  match: time.StartDateTime(this) {
+    from-property: EventTime
+  }
+  template-macro(dateTime) {
+    param (dateTime) { expression (this) }
+  }
+}

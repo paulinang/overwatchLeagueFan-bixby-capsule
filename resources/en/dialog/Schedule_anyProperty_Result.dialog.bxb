@@ -14,14 +14,14 @@ dialog (Result) {
     if (size(schedule.matches) == 1) { // only one match, give a bit more info (schduled start time)
       template ("#{input(action.team)} has one upcoming match[ on #{value(schedule.matches[0].time.start)}].")
     }
-    template ("#{input(action.team)} has #{size(schedule.matches)} upcoming #{concept(schedule.matches)}.[ The first one is on #{value(schedule.matches[0].time.start)}.]")
+    template ("#{input(action.team)} has #{size(schedule.matches)} upcoming #{concept(schedule.matches)}.[ The first one is scheduled #{value(schedule.matches[0].time.start)}.]")
   } else {
     // No user inputs given
     if (size(schedule.series) == 1 && schedule.series[0].status == 'InProgress') {
       // Series in progress
       if (size(schedule.tournaments) == 1 && schedule.tournaments[0].status == 'InProgress') {
         // Tournamnet in progress
-        template ("#{value(schedule.series[0].name)} is in progress[, with #{size(schedule.matches)} #{concept(schedule.matches)} scheduled.]")
+        template ("#{value(schedule.series[0].name)} is in progress[, with #{size(schedule.matches)} upcoming #{concept(schedule.matches)}.]")
       } else {
         // TODO: dialog about last tournament's winners, and when next series will begin
         template ("#{value(schedule.series[0].name)} is in progress.")
