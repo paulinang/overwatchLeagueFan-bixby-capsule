@@ -1,0 +1,22 @@
+vocab (TeamToFilterBy) {
+  "AtlantaReign" { "atlanta reign" "reign" "atlanta" }
+  "BostonUprising" { "boston uprising" "uprising" "boston" }
+  "ChengduHunters" { "chengdu hunters" "cheng du hunters" "hunters" "chengdu" "cheng du" }
+  "DallasFuel" { "dallas fuel" "fuel" "dallas" }
+  "FloridaMayhem" { "florida mayhem" "mayhem" "florida" }
+  "GuangzhouCharge" { "guangzhou charge" "guang zhou charge" "charge" "guangzhou" "guang zhou" }
+  "HangzhouSpark" { "hangzhou spark" "hang zhou spark" "spark" "hangzhou" "hang zhou" }
+  "HoustonOutlaws" { "houston outlaws" "outlaws" "houston" }
+  "LondonSpitfire" { "london spitfire" "spitfire" "london" }
+  "LosAngelesGladiators" { "los angeles gladiators" "la glaidators"  "l a gladiators" "gladiators" }
+  "LosAngelesValiant" { "los angeles valiant" "la valiant"  "l a valiant" "valiant" }
+  "NewYorkExcelsior" { "new york excelsior" "nyxl" "n y x l" "excelsior" "new york" }
+  "ParisEternal" { "paris eternal" "eternal" "paris eternals" "eternals" "paris" }
+  "PhiladelphiaFusion" { "philadelphia fusion" "fusion" "philadelphia"  "philly fusion" "philly" }
+  "SanFranciscoShock" { "san francisco shock" "shock" "san francisco" "s f" "s f shock" "sf" "sf shock" }
+  "SeoulDynasty" { "seoul dynasty" "dynasty" "seoul" }
+  "ShanghaiDragons" { "shanghai dragons" "dragons" "shanghai" "shang hai dragons" "shang hai" }
+  "TorontoDefiant" { "toronto defiant" "defiant" "toronto" }
+  "VancouverTitans" { "vancouver titans" "titans" "vancouver" }
+  "WashingtonJustice" { "washington justice" "justice" "washington" }
+}

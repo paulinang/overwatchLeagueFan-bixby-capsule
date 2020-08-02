@@ -3,3 +3,7 @@ train (t-o9slzc96grkbteu5u8sgae6cd) {
   plan (lcrNCsIwEATgsf49hKAgeM3FJ/CvXrxZvIe4tIGYlGTb6sVnN/UgIuTgwsIM82GKee1K4VrynWRVnUiWDeXSioumbmMMFon9rCq6NoawTIAj8cesEqbQNypcrg2T3z4gEmznbGDfKP7x6//8s6vIYtbqVnAcxF4y9eJwrz2FoJ3FBANkGGKEccz4alnMeH9/fYv7Cw==)
   last-modified (1560836492290)
 }
+train (t-o9a0a6k3txwa2nvhju8xxbyec) {
+  utterance ("[g:Schedule#all] Any (Philly)[v:TeamToFilterBy:PhiladelphiaFusion] matches (tomorrow)[v:time.DateTimeExpression]")
+  last-modified (1596342082533)
+}

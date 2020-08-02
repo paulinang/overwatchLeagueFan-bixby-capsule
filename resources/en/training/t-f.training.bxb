@@ -1,0 +1,4 @@
+train (t-f2r4n5a4pmugngph1pdt9dhsg) {
+  utterance ("[g:Schedule#all] Does (SF Shock)[v:TeamToFilterBy:SanFranciscoShock] have any matches (this weekend)[v:time.DateTimeExpression]")
+  last-modified (1596341499052)
+}

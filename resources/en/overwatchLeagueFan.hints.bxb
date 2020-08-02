@@ -6,8 +6,8 @@ hints {
     hint ("With Overwatch League Fan, get me this week's matches") {
       preferred-hint ("Get me this week's matches")
     }
-    hint ("Ask Overwatch League Fan what games are playing this weekend") {
-      preferred-hint ("What games are playing this weekend")
+    hint ("Ask Overwatch League Fan does SF Shock have any matches scheduled this weekend") {
+      preferred-hint ("Does SF Shock have any matches scheduled this weekend")
     }
     hint ("In Overwatch League Fan, find matches for last month") {
       preferred-hint ("Find matches for last month")

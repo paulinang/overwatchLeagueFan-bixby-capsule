@@ -1,0 +1,25 @@
+dialog (Input) {
+  match: TeamToFilterBy (this)
+  switch (this) {
+    case (AtlantaReign) { template ("Atlanta Reign") }
+    case (BostonUprising) { template ("Boston Uprising") }
+    case (ChengduHunters) { template ("Chengdu Hunters") }
+    case (DallasFuel) { template ("Dallas Fuel") }
+    case (FloridaMayhem) { template ("Florida Mayhem") }
+    case (GuangzhouCharge) { template ("Guangzhou Charge") }
+    case (HangzhouSpark) { template ("Hangzhou Spark") }
+    case (HoustonOutlaws) { template ("Houston Outlaws") }
+    case (LondonSpitfire) { template ("LondonSpitfire") }
+    case (LosAngelesGladiators) { template ("LA Gladiators")  { speech ("Los Angeles Gladiators") } }
+    case (LosAngelesValiant) { template ("LA Valiant")  { speech ("Los Angeles Valiant") } }
+    case (NewYorkExcelsior) { template ("NY Excelsior") { speech ("New York Excelsior") } }
+    case (ParisEternal) { template ("Paris Eternal") }
+    case (PhiladelphiaFusion) { template ("Philadelphia Fusion") }
+    case (SanFranciscoShock) { template ("SF Shock") { speech ("San Francisco Shock") } }
+    case (SeoulDynasty) { template ("Seoul Dynasty") }
+    case (ShanghaiDragons) { template ("Shanghai Dragons") }
+    case (TorontoDefiant) { template ("Toronto Defiant") }
+    case (VancouverTitans) { template ("Vancouver Titans") }
+    case (WashingtonJustice) { template ("Washington Justice") }
+  }
+}

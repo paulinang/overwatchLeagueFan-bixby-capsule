@@ -4,7 +4,7 @@ let fail = require('fail')
 
 const pandaScore = require('./pandaScore/main')
 
-module.exports.function = function getSchedule ($vivContext, time) {
+module.exports.function = function getSchedule ($vivContext, time, team) {
   console.log('Getting Overwatch League schedule')
   const timezone = $vivContext.timezone
   let matches
@@ -28,13 +28,13 @@ module.exports.function = function getSchedule ($vivContext, time) {
         // TODO: get last tournament results + when next tournament begins
       } else {
         // current tournament -> get current + upcoming matches
-        let currentMatch = pandaScore.getMatches(timezone, time, 'running', currentTournament[0])
-        let upcomingMatches = pandaScore.getMatches(timezone, time, 'upcoming', currentTournament[0])
+        let currentMatch = pandaScore.getMatches(timezone, time, team, 'running', currentTournament[0])
+        let upcomingMatches = pandaScore.getMatches(timezone, time, team, 'upcoming', currentTournament[0])
         matches = currentMatch ? currentMatch.concat(upcomingMatches) : upcomingMatches
       }
     }
   } else {
-    matches = pandaScore.getMatches(timezone, time)
+    matches = pandaScore.getMatches(timezone, time, team)
   }
   
   return {

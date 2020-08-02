@@ -29,10 +29,10 @@ const getTournaments = (timezone, time, status, series) => {
   return tournaments
 }
 
-const getMatches = (timezone, time, status, tournament) => {
+const getMatches = (timezone, time, team, status, tournament) => {
   console.log('Getting matches')
   
-  const apiResponse = client.getMatchAPIData(time, status, tournament)
+  const apiResponse = client.getMatchAPIData(time, team, status, tournament)
   
   console.log(apiResponse ? apiResponse.length + ' match(es) found' : 'No matches found')
   

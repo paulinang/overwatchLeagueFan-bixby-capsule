@@ -5,7 +5,7 @@ endpoints {
       local-endpoint (constructTimeToFilterBy.js)
     }
     action-endpoint (GetSchedule) {
-      accepted-inputs ($vivContext, time)
+      accepted-inputs ($vivContext, time, team)
       local-endpoint (getSchedule.js)
     }
     action-endpoint (GetMatchVideoUrl) {

@@ -1,4 +1,4 @@
-/* 
+/*
 Handle API requests
 */
 
@@ -7,18 +7,20 @@ let console = require('console')
 let config = require('config')
 let secret = require ('secret')
 
+const teamSlug = require('./data/teamSlug')
+
 const BASEURL = config.get('pandaScore.baseUrl')
 const LEAGUEID = config.get('pandaScore.league.id')
 
 const getSeriesAPIData = (time, status, count) => {
   const ENDPOINT = status ? 'series/' + status.toLowerCase() : 'series'
   const SERIESURL = BASEURL + '/' +  ENDPOINT
-  
+
   let queryArgs = {
     token: secret.get('pandaScore.accessToken'),
     'filter[league_id]': LEAGUEID
   }
-  
+
   if (time) {
     if (time.queryString.length === 1) {
       queryArgs['filter[begin_at]'] = time.queryString[0]
@@ -28,13 +30,13 @@ const getSeriesAPIData = (time, status, count) => {
     // when asking for events in a time period, we sort by earliest event
     queryArgs['sort'] = 'begin_at'
   }
-  
+
   if (count) {
     queryArgs['page[size]'] = count
   }
-  
+
   console.log('Sending request at:', SERIESURL, queryArgs)
-  
+
   return http.getUrl(SERIESURL, {
     format: 'json',
     query: queryArgs
@@ -44,11 +46,11 @@ const getSeriesAPIData = (time, status, count) => {
 const getTournamentAPIData = (time, status, count, series) => {
   const ENDPOINT = status ? 'tournaments/' + status.toLowerCase() : 'tournaments'
   const TOURNAMENTURL = BASEURL + '/' +  ENDPOINT
-  
+
   let queryArgs = {
     token: secret.get('pandaScore.accessToken')
   }
-  
+
   if (time) {
     if (time.queryString.length === 1) {
       queryArgs['filter[begin_at]'] = time.queryString[0]
@@ -58,32 +60,32 @@ const getTournamentAPIData = (time, status, count, series) => {
     // when asking for events in a time period, we sort by earliest event
     queryArgs['sort'] = 'begin_at'
   }
-  
+
   if (series) {
     queryArgs['filter[serie_id]'] = series.id
   }
-  
+
   if (count) {
     queryArgs['page[size]'] = count
   }
-  
+
   console.log('Sending request at:', TOURNAMENTURL, queryArgs)
-  
+
   return http.getUrl(TOURNAMENTURL, {
     format: 'json',
     query: queryArgs
   })
 }
 
-const getMatchAPIData = (time, status, tournament, count) => {
+const getMatchAPIData = (time, team, status, tournament, count) => {
   const ENDPOINT = status ? 'matches/' + status.toLowerCase() : 'matches'
   const MATCHURL = BASEURL + '/' +  ENDPOINT
-  
+
   let queryArgs = {
     token: secret.get('pandaScore.accessToken'),
     'filter[league_id]': LEAGUEID
   }
-  
+
   if (time) {
     if (time.queryString.length === 1) {
       queryArgs['filter[begin_at]'] = time.queryString[0]
@@ -92,11 +94,16 @@ const getMatchAPIData = (time, status, tournament, count) => {
     }
     queryArgs['sort'] = 'begin_at'
   }
-  
+
   if (tournament) {
     queryArgs['filter[tournament_id]'] = tournament.id
   }
-  
+
+  if (team) {
+    console.log(team, teamSlug[team])
+    queryArgs['filter[opponent_id]'] = teamSlug[team]
+  }
+
   let results = []
   if (count) {
     if (count <= 100) {
@@ -143,7 +150,7 @@ const getMatchAPIData = (time, status, tournament, count) => {
       }
     }
   }
-  
+
   return results
 }
 

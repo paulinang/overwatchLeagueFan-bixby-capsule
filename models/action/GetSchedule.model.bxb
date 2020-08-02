@@ -6,6 +6,10 @@ action (GetSchedule) {
       type (TimeToFilterBy)
       min (Optional) max (One)
     }
+    input (team) {
+      type (TeamToFilterBy)
+      min (Optional) max (One)
+    }
   }
   output (Schedule) {
     throws {

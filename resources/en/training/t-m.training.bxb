@@ -8,3 +8,11 @@ train (t-msx105f4e3mxrk5y3qmasqoiq) {
   plan (lcrNCsIwEATgsf49hKAgeM3FJ/CvXrxZvIe4tIGYlGTb6sVnN/UgIuTgwsIM82GKee1K4VrynWRVnUiWDeXSioumbmMMFon9rCq6NoawTIAj8cesEqbQNypcrg2T3z4gEmznbGDfKP7x6//8s6vIYtbqVnAcxF4y9eJwrz2FoJ3FBANkGGKEccz4alnMeH9/fYv7Cw==)
   last-modified (1560836161332)
 }
+train (t-mft0cf6fbxy0zvsb75ubvz17y) {
+  utterance ("[g:Schedule#all] What's the schedule for (Hangzhou Spark)[v:TeamToFilterBy:HangzhouSpark]?")
+  last-modified (1596339792104)
+}
+train (t-mq50uqmw0rahs40nyhouifzt4) {
+  utterance ("[g:Schedule#all] Is (NYXL)[v:TeamToFilterBy:NewYorkExcelsior] playing")
+  last-modified (1596342297776)
+}

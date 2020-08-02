@@ -3,3 +3,7 @@ train (t-zgn49f4tv0cc8u101tj4y4kxj) {
   plan (lcrNCsIwEATgsf49hKAgeM3FJ/CvXrxZvIe4tIGYlGTb6sVnN/UgIuTgwsIM82GKee1K4VrynWRVnUiWDeXSioumbmMMFon9rCq6NoawTIAj8cesEqbQNypcrg2T3z4gEmznbGDfKP7x6//8s6vIYtbqVnAcxF4y9eJwrz2FoJ3FBANkGGKEccz4alnMeH9/fYv7Cw==)
   last-modified (1560366926267)
 }
+train (t-z33u8v457rxkxa35yj2d71orh) {
+  utterance ("[g:Schedule#all] Do the (Chengdu Hunters)[v:TeamToFilterBy:ChengduHunters] have any games (today)[v:time.DateTimeExpression]?")
+  last-modified (1596341834443)
+}
