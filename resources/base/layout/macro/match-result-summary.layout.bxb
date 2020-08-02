@@ -4,10 +4,9 @@ layout-macro-def(match-result-summary) {
   }
   content {
     compound-card {
-      on-click {
-        view-for (match)
-      }
-
+      // No dive to details as free level of PandaScore API doesn't give enough data to warrant a details page
+      // A possible on-click intent would be to punch out to youtube VOD for that match
+      
       content {
         layout-macro (match-title-area) {
           param (match) { expression (match) }
