@@ -1,8 +1,8 @@
 # Overwatch League Fan
-An app for Samsung's voice assistant Bixby (a.k.a a Bixby capsule) that provides information about the eSports event [Overwatch League](https://overwatchleague.com/). It is published on the Bixby markeplace for en-US phones.
+An app for Samsung's voice assistant Bixby (a.k.a a Bixby capsule) that provides information about the eSports event [Overwatch League](https://overwatchleague.com/). It is published on the Bixby marketplace for en-US phones.
 
 ## Use cases
-Inputs: Time, team name
+Inputs: Time, team name\
 Output: A list of matches with time, opponents, and score if available
 
 Example natural language queries:
@@ -28,5 +28,5 @@ This would take over the disabled Twitch portions and allow punching out to past
 Instead of upgrading to the paid PandaScore API tier, I'd like to look into scrapping the [official site](https://overwatchleague.com/) for data. I've done some intial exploration in a [separate project](https://github.com/paulinang/overwatchleague-scraper), but it needs updates for changes to league format due to COVID-19 before any more work can be done.
 
 ## Resources
-[Bixby Developer Center](https://bixbydevelopers.com/) -- Build your own Bixby capsule
+[Bixby Developer Center](https://bixbydevelopers.com/) -- Build your own Bixby capsule\
 [PandaScore API](https://pandascore.co/) -- eSports data provider for other video games too (LoL, CS:GO)
