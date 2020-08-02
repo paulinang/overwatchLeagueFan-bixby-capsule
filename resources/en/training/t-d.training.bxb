@@ -3,3 +3,7 @@ train (t-dycqjvt4ixi6k5nkakbl2c6b6) {
   plan (Y2BikCvIT9fLL0stKk8sSc7wSU1ML011S8zTC8tMLXfMyWGQxyEfnJyRmlKak8rACIQMDExADGYBAA==)
   last-modified (1560836729779)
 }
+train (t-deac3nuic7z1rt9x8rgd84yjd) {
+  utterance ("[g:Schedule#all] Check if (Philly Fusion)[v:TeamToFilterBy:PhiladelphiaFusion] is playing")
+  last-modified (1596364878352)
+}
