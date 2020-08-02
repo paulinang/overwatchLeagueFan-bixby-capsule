@@ -4,15 +4,16 @@ dialog (Result) {
       from-output: GetSchedule (action)
     }
   }
+
   if (exists(action.time)) {
     template ("I found #{size(schedule.matches)} #{concept(schedule.matches)} scheduled #{input(action.time)}.")
     
   } else {
-    //// USER GAVE NO INPUT ////
+    // No input
     if (size(schedule.series) == 1 && schedule.series[0].status == 'InProgress') {
-      ///// SERIES IN PROGRESS /////
+      // Series in progress
       if (size(schedule.tournaments) == 1 && schedule.tournaments[0].status == 'InProgress') {
-        ///// TOURNAMENT IN PROGRESS /////
+        // Tournamnet in progress
         template ("#{value(schedule.series[0].name)}, #{value(schedule.tournaments[0].name)} is in progress[, with #{size(schedule.matches)} #{concept(schedule.matches)} left.]")
       } else {
         // TODO: dialog about last tournament's winners, and when next series will begin
@@ -21,9 +22,9 @@ dialog (Result) {
       template ("#{value(schedule.series[0].name)}, #{value(schedule.tournaments[0].name)} is in progress.")
       
     } else {
-      //// OFF SEASON /////
+      // Off season
       template ("Overwatch League is in its off season.")
-      // TODO: off season dialog - last serie's winners, when will new series begin
+      // TODO: off season dialog - last series' winners, when will new series begin
     }
   }
   

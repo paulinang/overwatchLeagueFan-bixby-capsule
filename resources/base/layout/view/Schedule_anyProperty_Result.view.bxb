@@ -4,6 +4,9 @@ result-view {
       from-output :GetSchedule (action)
     }
   }
+  message {
+    template ("#{event(this, 'Result')}")
+  }
 
   render {
     if (size(schedule.matches) > 1) {
