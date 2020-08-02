@@ -9,7 +9,6 @@ capsule {
   runtime-version (7)
   capsule-imports {
     import (viv.time) { as (time) version (3.1.195) }
-    import (viv.punchoutToApp) { as (punchout) version(1.0.19) }
   }
   store-sections {
     section (GamesAndFun)

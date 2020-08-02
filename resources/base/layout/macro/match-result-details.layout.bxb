@@ -33,11 +33,6 @@
           label { template-macro (official-site-attribution) }
           url { template ("#{raw(leagueUrl)}") }
         }
-
-        // disabled until update GetMatchVideoUrl to get youtube links
-        // layout-macro (match-video-punchout) {
-        //   param (match) { expression (match) }
-        // }
       }
     }
   }
